@@ -1,0 +1,20 @@
+[12-Jan-2014 18:43:18] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:43:18] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:43:18] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'header.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:43:59] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:43:59] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:43:59] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'header.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:46:18] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:46:18] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1.php on line 17
+[12-Jan-2014 18:46:18] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'header.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home1/jebbs/public_html/jams/jam1.php on line 17
+[18-Jan-2014 22:41:29] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1submit.php on line 17
+[18-Jan-2014 22:41:29] PHP Warning:  include(header.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/jam1submit.php on line 17
+[18-Jan-2014 22:41:29] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'header.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home1/jebbs/public_html/jams/jam1submit.php on line 17
+[19-Jan-2014 00:21:32] PHP Warning:  include(submissions.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/submitgame.php on line 2
+[19-Jan-2014 00:21:32] PHP Warning:  include(submissions.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home1/jebbs/public_html/jams/submitgame.php on line 2
+[19-Jan-2014 00:21:32] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'submissions.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home1/jebbs/public_html/jams/submitgame.php on line 2
+[19-Jan-2014 00:21:32] PHP Fatal error:  Class 'Submission' not found in /home1/jebbs/public_html/jams/submitgame.php on line 4
+[19-Jan-2014 00:42:13] PHP Parse error:  syntax error, unexpected '/' in /home1/jebbs/public_html/jams/submission.php on line 47
+[19-Jan-2014 00:43:10] PHP Parse error:  syntax error, unexpected '/' in /home1/jebbs/public_html/jams/submission.php on line 47
+[19-Jan-2014 00:43:57] PHP Fatal error:  Call to undefined function  submittodatabase() in /home1/jebbs/public_html/jams/submitgame.php on line 9
+[19-Jan-2014 11:26:28] PHP Fatal error:  Call to undefined method Submission::output() in /home1/jebbs/public_html/jams/submitgame.php on line 11
