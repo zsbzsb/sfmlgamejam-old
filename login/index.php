@@ -11,11 +11,11 @@ if ($session->GetIsLoggedIn()) header("location:/");
     <form name="LoginForm" method="post" action="/scripts/dologin.php">
         <div class="row"></div>
         <div class="row">
-            <h3 style="color: red;"><?php if (isset($_GET['error'])) echo $_GET['error']; ?><h3>
+            <h3 style="color: red;"><?php if (isset($_GET['error'])) echo htmlspecialchars($_GET['error']); ?><h3>
         </div>
         <div class="row">
             <span class="label">Username:</span>
-            <input type="text" name="username" value="<?php if (isset($_GET['username'])) echo $_GET['username']; ?>" class="textbox" />
+            <input type="text" name="username" value="<?php if (isset($_GET['username'])) echo htmlspecialchars($_GET['username']); ?>" class="textbox" />
         </div>
         <div class="row">
             <span class="label">Password:</span>

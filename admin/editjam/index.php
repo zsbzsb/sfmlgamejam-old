@@ -9,7 +9,7 @@ if (!$session->GetIsAdmin()) header("location:/");
 
 <div id="form-container">
     <form name="EditJamForm" method="post" action="/admin/editjam/doeditjam.php">
-        <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
+        <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" />
         <div class="row"></div>
         <div class="row">
             <a class="link" href="/admin/viewthemes?id=<?php echo $_GET['id']; ?>&title=<?php echo $_GET['title']; ?>" style="margin-left: 10px;">View Themes</a>
@@ -17,19 +17,19 @@ if (!$session->GetIsAdmin()) header("location:/");
         </div>
         <div class="row">
             <span class="label">Title:</span>
-            <input type="text" name="title" value="<?php echo $_GET['title']; ?>" class="textbox" />
+            <input type="text" name="title" value="<?php echo htmlspecialchars($_GET['title']); ?>" class="textbox" />
         </div>
         <div class="row">
             <span class="label">Begin Time:</span>
-            <input type="text" name="begintime" value="<?php echo $_GET['begin']; ?>" class="textbox" />
+            <input type="text" name="begintime" value="<?php echo htmlspecialchars($_GET['begin']); ?>" class="textbox" />
         </div>
         <div class="row">
             <span class="label">End Time:</span>
-            <input type="text" name="endtime" value="<?php echo $_GET['end']; ?>" class="textbox" />
+            <input type="text" name="endtime" value="<?php echo htmlspecialchars($_GET['end']); ?>" class="textbox" />
         </div>
         <div class="row">
             <span class="label">Chosen Theme:</span>
-            <input type="text" name="chosentheme" value="<?php echo $_GET['chosen']; ?>" class="textbox" />
+            <input type="text" name="chosentheme" value="<?php echo htmlspecialchars($_GET['chosen']); ?>" class="textbox" />
         </div>
         <div class="row">
             <input type="submit" value="Save" class="button" />

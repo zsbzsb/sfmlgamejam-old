@@ -9,7 +9,7 @@ if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsActive) header("location:/")
 <h2>Suggest Themes</h2>
 
 <?php
-if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".$_GET['suggested']."'</h3></br>";
+if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".htmlspecialchars($_GET['suggested'])."'</h3></br>";
 ?>
 
 <div id="form-container">
