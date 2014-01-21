@@ -1,0 +1,11 @@
+CREATE TABLE `themes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `JamID` int(11) NOT NULL,
+  `Theme` text NOT NULL,
+  `TotalVotes` int(11) NOT NULL,
+  `CanVote` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `JamID_idx` (`JamID`),
+  CONSTRAINT `JamID` FOREIGN KEY (`JamID`) REFERENCES `jams` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
