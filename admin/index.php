@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html>
-<body>
-<center>
-<form action="welcome.php" method="post">
-user name: <input type="text" name="name"><br>
-password:&nbsp; <input type="text" name="email"><br>
-<input type="submit" value="login">
-</form>
-</center>
-</body>
-</html> 
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
+$session = new LoginSession();
+if (!$session->GetIsAdmin()) header("location:/");
+?>
+<?php $selected = "admin"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+
+<h2>Administrator Functions</h2>
+
+<div id="form-container">
+    <div class="row"></div>
+    <div class="row">
+        <a class="link" href="/admin/addjam" style="margin-left: 10px;">Add Jam</a>
+    </div>
+    <div class="row">
+        <a class="link" href="/admin/viewjams" style="margin-left: 10px;">View Jams</a>
+    </div>
+</div>
+
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

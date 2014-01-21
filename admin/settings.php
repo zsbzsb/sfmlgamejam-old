@@ -1,5 +1,0 @@
-<?php
-
-$GLOBALS['themesubmit'] = true;
-
-?>

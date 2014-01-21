@@ -1,0 +1,44 @@
+#form-container {
+    display: block;
+    width: 500px;
+    margin: 15px auto;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+.row {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+}
+.label {
+    float: left;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    margin-left: 15px;
+}
+.textbox {
+    width: 250px;
+    height: 30px;
+    float: right;
+    margin-right: 15px;
+}
+.checkbox {
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-right: 15px;
+}
+.radiobutton {
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-right: 15px;
+}
+.button {
+    width: 75px;
+    height: 30px;
+    float: right;
+    margin-right: 30px;
+}
