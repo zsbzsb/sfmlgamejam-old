@@ -8,9 +8,9 @@ class DBAccess
     public function __construct()
     {
         $this->host = "localhost";
-        $this->username = "username";
-        $this->password = "password";
-        $this->database = "database";
+        $this->username = "root";
+        $this->password = "zsbzsb";
+        $this->database = "sfmlgamejam";
     }
     public function CreateDBConnection()
     {

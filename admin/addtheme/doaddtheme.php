@@ -12,7 +12,7 @@ if ($session->GetIsAdmin())
     $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes) VALUES (?, ?, 0);");
     $stmt->bind_param("ss", $id, $theme);
     $stmt->execute();
-    header("location:/admin/viewthemes?id=".$id."&title=".$title);
+    header("location:/admin/viewthemes/?id=".$id."&title=".$title);
 }
 else
 {

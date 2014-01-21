@@ -14,7 +14,7 @@ if ($session->GetIsAdmin())
     $stmt = $mysqli->prepare("UPDATE jams SET Title = ?, BeginTime = ?, EndTime = ?, ChosenTheme = ? WHERE ID = ?;");
     $stmt->bind_param("sssss", $title, $begintime, $endtime, $chosentheme, $id);
     $stmt->execute();
-    header("location:/admin/viewjams");
+    header("location:/admin/viewjams/");
 }
 else
 {

@@ -7,7 +7,7 @@ if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsActive) header("location:/")
 else
 {
     $theme = trim($_POST['theme']);
-    if ($theme == "") header("location:/suggestions?error=Suggested Theme cannot be blank");
+    if ($theme == "") header("location:/suggestions/?error=Suggested Theme cannot be blank");
     else
     {
         $dbaccess = new DBAccess();
@@ -17,7 +17,7 @@ else
         $stmt->execute();
         if ($stmt->fetch())
         {
-            header("location:/suggestions?error=This theme has already been suggested&theme=".$theme);
+            header("location:/suggestions/?error=This theme has already been suggested&theme=".$theme);
             return;
         }
         $stmt->close();
@@ -31,7 +31,7 @@ else
         $stmt->bind_param("sss", $ActiveJamID, $themeid, $userid);
         $stmt->execute();
         $stmt->close();
-        header("location:/suggestions?suggested=".$theme);
+        header("location:/suggestions/?suggested=".$theme);
     }
 }
 ?>

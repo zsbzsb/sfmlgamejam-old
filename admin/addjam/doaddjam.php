@@ -12,7 +12,7 @@ if ($session->GetIsAdmin())
     $stmt = $mysqli->prepare("INSERT INTO jams (Title, BeginTime, EndTime, ChosenTheme) VALUES (?, ?, ?, '');");
     $stmt->bind_param("sss", $title, $begintime, $endtime);
     $stmt->execute();
-    header("location:/admin/viewjams");
+    header("location:/admin/viewjams/");
 }
 else
 {

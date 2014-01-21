@@ -8,7 +8,7 @@ else
 {
     if (!isset($_POST['themeid']))
     {
-        header("location:/voting");
+        header("location:/voting/");
         return;
     }
     $themeid = $_POST['themeid'];
@@ -23,6 +23,6 @@ else
     $stmt->bind_param("sss", $ActiveJamID, $themeid, $userid);
     $stmt->execute();
     $stmt->close();
-    header("location:/voting?voted=1");
+    header("location:/voting/?voted=1");
 }
 ?>

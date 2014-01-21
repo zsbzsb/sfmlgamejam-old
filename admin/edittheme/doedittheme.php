@@ -15,7 +15,7 @@ if ($session->GetIsAdmin())
     $stmt = $mysqli->prepare("UPDATE themes SET Theme = ?, CanVote = ? WHERE ID = ?;");
     $stmt->bind_param("sis", $theme, $canvote, $id);
     $stmt->execute();
-    header("location:/admin/viewthemes?id=".$jamid."&title=".$title);
+    header("location:/admin/viewthemes/?id=".$jamid."&title=".$title);
 }
 else
 {
