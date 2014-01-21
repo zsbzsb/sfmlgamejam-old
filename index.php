@@ -5,7 +5,7 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
     $session = new LoginSession();
-    if (!$session->GetIsLoggedIn()) echo '<h3>To continue please login and register</h3>';
+    if (!$session->GetIsLoggedIn()) echo '<h3>To continue please register and login</h3>';
 ?>
 
 <!--<a class="twitter-timeline"  href="https://twitter.com/sfmlgamejam"  data-widget-id="422492659622481920">Tweets by @sfmlgamejam</a>
