@@ -6,7 +6,18 @@ if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsActive) header("location:/")
 ?>
 <?php $selected = "suggestions"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
-<h2>Suggest Themes</h2>
+<h2>Suggest Themes for the <?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
+$dbaccess = new DBAccess();
+$mysqli = $dbaccess->CreateDBConnection();
+$stmt = $mysqli->prepare("SELECT Title FROM jams WHERE ID = ?;");
+$stmt->bind_param("s", $ActiveJamID);
+$stmt->execute();
+$stmt->bind_result($Title);
+$stmt->fetch();
+echo $Title;
+?></h2>
 
 <?php
 if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".htmlspecialchars($_GET['suggested'])."'</h3></br>";
