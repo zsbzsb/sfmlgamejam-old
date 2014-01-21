@@ -8,6 +8,7 @@ else
 {
     $theme = trim($_POST['theme']);
     if ($theme == "") header("location:/suggestions/?error=Suggested Theme cannot be blank");
+    else if (strlen($theme) > 20) header("location:/suggestions/?error=Max length is 20 characters&theme=".$theme);
     else
     {
         $dbaccess = new DBAccess();
