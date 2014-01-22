@@ -53,8 +53,9 @@ class LoginSession
         $stmt->execute();
         if ($stmt->fetch()) return false;
         $stmt->close();
-        $stmt = $mysqli->prepare("INSERT INTO users (Username, Password) VALUES (?, ?);");
-        $stmt->bind_param("ss", $username, hash("SHA512", $password));
+        $stmt = $mysqli->prepare("INSERT INTO users (Username, Password, Salt) VALUES (?, ?, ?);");
+        $Salt = uniqid('', true);
+        $stmt->bind_param("sss", $username, hash("SHA512", $Salt.$password.$Salt), $Salt);
         $stmt->execute();
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $mysqli->insert_id;
@@ -66,11 +67,20 @@ class LoginSession
     {
         $dbaccess = new DBAccess();
         $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID, IsAdmin FROM users WHERE Username = ? AND Password = ?;");
-        $stmt->bind_param("ss", $username, hash("SHA512", $password));
+        $stmt = $mysqli->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ?;");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
-        $stmt->bind_result($ID, $IsAdmin);
+        $stmt->bind_result($ID, $IsAdmin, $HashedPassword, $Salt);
         if (!$stmt->fetch()) return false;
+        if (hash("SHA512", $Salt.$password.$Salt) != $HashedPassword) return false;
+        if ($Salt == "")
+        {
+            $Salt = uniqid('', true);
+            $stmt->close();
+            $stmt = $mysqli->prepare("UPDATE users SET Password = ?, Salt = ? WHERE Username = ?;");
+            $stmt->bind_param("sss", hash("SHA512", $Salt.$password.$Salt), $Salt, $username);
+            $stmt->execute();
+        }
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $ID;
         $_SESSION['username'] = $username;
