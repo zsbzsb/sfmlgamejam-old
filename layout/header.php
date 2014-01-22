@@ -3,7 +3,7 @@
     <title>SFML Game Jam</title>
     <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link rel="stylesheet" href="/css/form.css" type="text/css">
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
 <body>
     <a href="/" style="text-decoration: none;"><h1>SFML Game Jam</h1></a>
