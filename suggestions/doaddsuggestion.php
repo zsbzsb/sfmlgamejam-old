@@ -22,7 +22,7 @@ else
             return;
         }
         $stmt->close();
-        $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 0);");
+        $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 1);");
         $stmt->bind_param("ss", $ActiveJamID, $theme);
         $stmt->execute();
         $themeid = $mysqli->insert_id;

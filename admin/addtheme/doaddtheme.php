@@ -9,7 +9,7 @@ if ($session->GetIsAdmin())
     $title = $_POST['title'];
     $dbaccess = new DBAccess();
     $mysqli = $dbaccess->CreateDBConnection();
-    $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes) VALUES (?, ?, 0);");
+    $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 1);");
     $stmt->bind_param("ss", $id, $theme);
     $stmt->execute();
     header("location:/admin/viewthemes/?id=".$id."&title=".$title);
