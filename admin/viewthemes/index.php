@@ -7,21 +7,22 @@ if (!$session->GetIsAdmin()) header("location:/");
 
 <h2>View Themes - Jam: <?php echo $_GET['title']; ?></h2>
 
-<div id="form-container" style="width: 675px">
+<div id="form-container" style="width: 850px">
     <?php
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         $dbaccess = new DBAccess();
         $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID, Theme, TotalVotes, CanVote FROM themes WHERE JamID = ?;");
+        $stmt = $mysqli->prepare("SELECT thm.ID, thm.Theme, thm.TotalVotes, thm.CanVote, usr.Username FROM themes AS thm LEFT OUTER JOIN suggestions AS sug ON sug.ThemeID = thm.ID LEFT OUTER JOIN users AS usr ON usr.ID = sug.UserID WHERE thm.JamID = ?;");
         $stmt->bind_param("s", $_GET['id']);
         $stmt->execute();
-        $stmt->bind_result($ID, $Theme, $TotalVotes, $CanVote);
+        $stmt->bind_result($ID, $Theme, $TotalVotes, $CanVote, $Username);
         echo '
             <div class="row">
                 <span class="label" style="width: 35px; margin: 0px; color: orange;">ID</span>
                 <span class="label" style="width: 250px; margin: 0px; color: orange;">Theme</span>
                 <span class="label" style="width: 175px; margin: 0px; color: orange;">Total Votes</span>
                 <span class="label" style="width: 115px; margin: 0px; color: orange;">Can Vote</span>
+                <span class="label" style="width: 175px; margin: 0px; color: orange;">User</span>
             </div>
             ';
         while ($stmt->fetch())
@@ -32,6 +33,7 @@ if (!$session->GetIsAdmin()) header("location:/");
                 <span class="label" style="width: 250px; margin: 0px;">'.$Theme.'</span>
                 <span class="label" style="width: 175px; margin: 0px;">'.$TotalVotes.'</span>
                 <span class="label" style="width: 115px; margin: 0px;">'.$CanVote.'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.$Username.'</span>
                 <a class="link" href="/admin/edittheme?id='.$ID.'&theme='.$Theme.'&title='.$_GET['title'].'&jamid='.$_GET['id'].'&canvote='.$CanVote.'" style="float: right; margin-right: 10px;">Edit</a>
             </div>
             ';
