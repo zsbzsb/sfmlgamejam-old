@@ -60,9 +60,8 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "</br><h3>Thanks for vo
                 echo '
                     <div class="row">
                         <span class="label" style="color: orange;">Theme</span>
-                        <span class="label" style="float: right; margin-left: 0px; margin-right: 15px; color: orange;">Total Votes</span>
                     </div>';
-                $stmt = $mysqli->prepare("SELECT Theme, TotalVotes FROM themes WHERE JamID = ? AND CanVote = 1;");
+                $stmt = $mysqli->prepare("SELECT Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
                 $stmt->bind_param("s", $ActiveJamID);
                 $stmt->execute();
                 $stmt->bind_result($Theme, $TotalVotes);
@@ -71,7 +70,6 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "</br><h3>Thanks for vo
                     echo '
                         <div class="row">
                             <span class="label">'.$Theme.'</span>
-                            <span class="label" style="float: right; margin-left: 0px; margin-right: 15px;">'.$TotalVotes.'</span>
                         </div>';
                 }
         }
