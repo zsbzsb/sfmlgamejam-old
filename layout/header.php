@@ -16,31 +16,25 @@
             <?php
             include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
             include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
-            if ($ThemeSuggestionsActive)
+            if ($ThemeSuggestionsOpen)
             {
                 echo '<li><a ';
                 if ($selected == "suggestions") echo 'class="selected"';
                 echo 'href="/suggestions">Theme Suggestions</a></li>';
             }
-            if ($ThemeVotingActive)
+            if ($ThemeVotingOpen)
             {
                 echo '<li><a ';
                 if ($selected == "voting") echo 'class="selected"';
                 echo 'href="/voting">Theme Voting</a></li>';
             }
-            if ($JamActive)
+            if ($AddGamesActive || $EditGamesActive)
             {
                 echo '<li><a ';
                 if ($selected == "submissions") echo 'class="selected"';
                 echo 'href="/submissions">Game Submissions</a></li>';
             }
-            if ($NextJamActive)
-            {
-                echo '<li><a ';
-                if ($selected == "upcoming") echo 'class="selected"';
-                echo 'href="/upcoming">Upcoming Jam</a></li>';
-            }
-            if ($JamGallaryActive)
+            if ($JamGalleryActive)
             {
                 echo '<li><a ';
                 if ($selected == "previous") echo 'class="selected"';
@@ -73,7 +67,7 @@
             {
                 echo '
                     <li>
-                        <a href="/">'.$session->GetUserName().'</a>
+                        <a href="/">'.htmlspecialchars($session->GetUserName()).'</a>
                     </li>
                     <li>
                         <a href="/logout">Logout</a>
