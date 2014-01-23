@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
 $session = new LoginSession();
-if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsActive) header("location:/");
+if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsOpen) header("location:/");
 ?>
 <?php $selected = "suggestions"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
@@ -20,13 +20,14 @@ echo $Title;
 ?></h2>
 
 <?php
-if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".htmlspecialchars($_GET['suggested'])."'</h3></br>";
+if (isset($_GET['suggested'])) echo "<br><h3>Thanks for suggesting '".htmlspecialchars($_GET['suggested'])."'</h3><br>";
 ?>
 
 <div id="form-container">
     <?php
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
+        include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
         $session = new LoginSession();
         $dbaccess = new DBAccess();
         $mysqli = $dbaccess->CreateDBConnection();
@@ -56,13 +57,15 @@ if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".htmlspeci
                     <h3>'.$count.'/'.$MaxSuggestions.' Suggestions</h3>
                 </div>
                 <div class="row">
-                    <span class="label">Theme Suggestion:</span>
+                    <span class="label">Suggested Theme:</span>
                     <input type="text" name="theme" value="'.$theme.'" class="textbox" />
                 </div>
                 <div class="row">
                     <input type="submit" value="Suggest" class="button" />
                 </div>
                 </form>
+                </div>
+                <br><h4>No offensive/vulgar/inappropriate names</h4>
                 ';
         }
         else
@@ -76,9 +79,9 @@ if (isset($_GET['suggested'])) echo "</br><h3>Thanks for suggesting '".htmlspeci
                     <h3>Please check back soon for voting!</h3>
                 </div>
                 <div class="row"></div>
+                </div>
                 ';
         }
     ?>
-</div>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>
