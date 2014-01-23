@@ -31,4 +31,6 @@ if ($session->GetIsLoggedIn()) header("location:/");
     </form>
 </div>
 
+<br><h4>No offensive/vulgar/inappropriate names</h4>
+
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>
