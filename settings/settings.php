@@ -6,7 +6,7 @@ $JamRunning = false; // Used with submitting and editing game entries
 $JamCompleted = false; // Used with editing game entries before the next jam
 
 /* Any of the following may be active at any time - note above and make smart choices */
-$ThemeSuggestionsOpen = true;
+$ThemeSuggestionsOpen = false;
 
 $ThemeVotingOpen = false;
 
