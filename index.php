@@ -1,57 +1,82 @@
 <?php $selected = "home"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
-<h3>Hello and welcome to the SFML Game Jam website!</h3></br>
+<h3>Hello and welcome to the SFML Game Jam website!</h3><br>
 
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
     $session = new LoginSession();
-    if (!$session->GetIsLoggedIn()) echo '</br><h3>To continue please register and login</h3>';
+    if (!$session->GetIsLoggedIn()) echo '<br><h3>To continue please register and login</h3>';
     else
     {
         $dbaccess = new DBAccess();
         $mysqli = $dbaccess->CreateDBConnection();
-        if ($ThemeSuggestionsActive)
+        if ($NextJamQued)
         {
-            $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
-            $stmt->bind_param("s", $ActiveJamID);
-            $stmt->execute();
-            $stmt->bind_result($Title, $BeginTime);
-            $stmt->fetch();
-            echo '</br><h3>Theme Suggestions are open for the '.$Title.'</h3>';
-            echo '</br><h3>The Jam will begin on '.$BeginTime.'</h3>';
+            if ($ThemeSuggestionsOpen)
+            {
+                $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+                $stmt->bind_param("s", $ActiveJamID);
+                $stmt->execute();
+                $stmt->bind_result($Title, $BeginTime);
+                $stmt->fetch();
+                echo '<br><h3>Theme Suggestions are open for the '.$Title.'</h3>';
+                echo '<br><h3>The jam will begin on '.$BeginTime.'</h3>';
+            }
+            else if ($ThemeVotingOpen)
+            {
+                $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+                $stmt->bind_param("s", $ActiveJamID);
+                $stmt->execute();
+                $stmt->bind_result($Title, $BeginTime);
+                $stmt->fetch();
+                echo '<br><h3>Cast your vote now for the '.$Title.' theme</h3>';
+                echo '<br><h3>The jam will begin on '.$BeginTime.'</h3>';
+            }
+            else
+            {
+                $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+                $stmt->bind_param("s", $ActiveJamID);
+                $stmt->execute();
+                $stmt->bind_result($Title, $BeginTime);
+                $stmt->fetch();
+                echo '<br><h3>The '.$Title.' is around the corner</h3>';
+                echo '<br><h3>It will begin on '.$BeginTime.' with theme selection a few weeks earlier</h3>';
+            }
         }
-        else if ($ThemeVotingActive)
+        else if ($ThemeVisible)
         {
-            $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+            $stmt = $mysqli->prepare("SELECT Title, ChosenTheme, BeginTime FROM jams WHERE ID = ?;");
             $stmt->bind_param("s", $ActiveJamID);
             $stmt->execute();
-            $stmt->bind_result($Title, $BeginTime);
+            $stmt->bind_result($Title, $ChosenTheme, $BeginTime);
             $stmt->fetch();
-            echo '</br><h3>Theme Voting is active for the '.$Title.'</h3>';
-            echo '</br><h3>The Jam will begin on '.$BeginTime.'</h3>';
+            echo '<br><h3>The theme has been chosen for '.$Title.'</h3>';
+            echo '<br><h3>Base your game on "'.$ChosenTheme.'"!</h3>';
+            echo '<br><h3>And get ready to rumble....<br> The jam will begin on '.$BeginTime.'</h3>';
         }
-        else if ($JamActive)
+        else if ($JamRunning)
         {
-            $stmt = $mysqli->prepare("SELECT Title, EndTime, ChosenTheme FROM jams WHERE ID = ?;");
+            $stmt = $mysqli->prepare("SELECT Title, ChosenTheme, EndTime FROM jams WHERE ID = ?;");
             $stmt->bind_param("s", $ActiveJamID);
             $stmt->execute();
-            $stmt->bind_result($Title, $EndTime, $ChosenTheme);
+            $stmt->bind_result($Title, $ChosenTheme, $EndTime);
             $stmt->fetch();
-            echo '</br><h3>The '.$Title.' is now running!</h3>';
-            echo '<br><h3>Make sure your games are based on "'.$ChosenTheme.'" and remember have fun!</h3>';
-            echo '</br><h3>The Jam will end on '.$EndTime.'. Be sure to get your game submissions in!</h3>';
+            echo '<br><h3>The '.$Title.' is now in progress!</h3>';
+            echo '<br><h3>Get a move on it and base your game on "'.$ChosenTheme.'"!</h3>';
+            echo '<br><h3>Don'."'".'t forget the jam and all submissions will end on '.$EndTime.'</h3>';
         }
-        else if ($ThemeVotingActive)
+        else if ($JamCompleted)
         {
-            $stmt = $mysqli->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+            $stmt = $mysqli->prepare("SELECT Title FROM jams WHERE ID = ?;");
             $stmt->bind_param("s", $ActiveJamID);
             $stmt->execute();
-            $stmt->bind_result($Title, $BeginTime);
+            $stmt->bind_result($Title);
             $stmt->fetch();
-            echo '</br><h3>The '.$Title.' will begin on '.$BeginTime.'</h3>';
-            echo '</br><h3>Remember, Theme Selection will begin a week before</h3>';
+            echo '<br><h3>The '.$Title.' is now complete</h3>';
+            echo '<br><h3>I hope you finished those games...</h3>';
+            echo '<br><h3>Remember you can still work on cleaning up those game submissions</h3>';
         }
     }
 ?>
