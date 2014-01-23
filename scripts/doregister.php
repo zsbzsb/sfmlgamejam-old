@@ -7,6 +7,7 @@ if (!$session->GetIsLoggedIn())
     $password = trim($_POST['password']);
     $confirmpassword = trim($_POST['confirmpassword']);
     if ($username == "") header("location:/register/?error=Username cannot be blank");
+    else if (strlen($username) > 20) header("location:/register/?error=Username max length is 20 characters&username=".$username);
     else if ($password == "") header("location:/register/?username=".$username."&error=Password cannot be blank");
     else if ($password != $confirmpassword) header("location:/register/?username=".$username."&error=The passwords do not match");
     else if ($session->TryRegister($username, $password))
