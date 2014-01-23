@@ -3,7 +3,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
 $session = new LoginSession();
-if (!$session->GetIsLoggedIn() || !$ThemeVotingActive) header("location:/");
+if (!$session->GetIsLoggedIn() || !$ThemeVotingOpen) header("location:/");
 else
 {
     if (!isset($_POST['themeid']))

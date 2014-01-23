@@ -2,14 +2,14 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
 $session = new LoginSession();
-if (!$session->GetIsLoggedIn() || !$ThemeVotingActive) header("location:/");
+if (!$session->GetIsLoggedIn() || !$ThemeVotingOpen) header("location:/");
 ?>
 <?php $selected = "voting"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <h2>Vote on Themes</h2>
 
 <?php
-if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "</br><h3>Thanks for voting!</h3></br>";
+if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for voting!</h3><br>";
 ?>
 
 <div id="form-container">
@@ -45,7 +45,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "</br><h3>Thanks for vo
             {
                 echo '
                     <div class="row">
-                        <span class="label">'.$Theme.'</span>
+                        <span class="label">'.htmlspecialchars($Theme).'</span>
                         <input type="radio" name="themeid" value="'.$ID.'" class="radiobutton">
                     </div>';
             }
@@ -69,7 +69,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "</br><h3>Thanks for vo
                 {
                     echo '
                         <div class="row">
-                            <span class="label">'.$Theme.'</span>
+                            <span class="label">'.htmlspecialchars($Theme).'</span>
                         </div>';
                 }
         }
