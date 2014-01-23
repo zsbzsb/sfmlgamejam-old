@@ -27,7 +27,7 @@ if (!$session->GetIsAdmin()) header("location:/");
             echo '
             <div class="row">
                 <span class="label" style="width: 35px; margin: 0px;">'.$ID.'</span>
-                <span class="label" style="width: 250px; margin: 0px;">'.$Username.'</span>
+                <span class="label" style="width: 250px; margin: 0px;">'.htmlspecialchars($Username).'</span>
                 <span class="label" style="width: 115px; margin: 0px;">'.$IsAdmin.'</span>
             </div>
             ';

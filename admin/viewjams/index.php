@@ -29,10 +29,10 @@ if (!$session->GetIsAdmin()) header("location:/");
             echo '
             <div class="row">
                 <span class="label" style="width: 35px; margin: 0px;">'.$ID.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.$Title.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.$BeginTime.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.$EndTime.'</span>
-                <span class="label" style="width: 185px; margin: 0px;">'.$ChosenTheme.'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($Title).'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($BeginTime).'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($EndTime).'</span>
+                <span class="label" style="width: 185px; margin: 0px;">'.htmlspecialchars($ChosenTheme).'</span>
                 <a class="link" href="/admin/editjam?id='.$ID.'&title='.$Title.'&begin='.$BeginTime.'&end='.$EndTime.'&chosen='.$ChosenTheme.'" style="float: right; margin-right: 10px;">Edit</a>
             </div>
             ';

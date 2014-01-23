@@ -29,11 +29,11 @@ if (!$session->GetIsAdmin()) header("location:/");
         {
             echo '
             <div class="row">
-                <span class="label" style="width: 35px; margin: 0px;">'.$ID.'</span>
-                <span class="label" style="width: 250px; margin: 0px;">'.$Theme.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.$TotalVotes.'</span>
-                <span class="label" style="width: 115px; margin: 0px;">'.$CanVote.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.$Username.'</span>
+                <span class="label" style="width: 35px; margin: 0px;">'.htmlspecialchars($ID).'</span>
+                <span class="label" style="width: 250px; margin: 0px;">'.htmlspecialchars($Theme).'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($TotalVotes).'</span>
+                <span class="label" style="width: 115px; margin: 0px;">'.htmlspecialchars($CanVote).'</span>
+                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($Username).'</span>
                 <a class="link" href="/admin/edittheme?id='.$ID.'&theme='.$Theme.'&title='.$_GET['title'].'&jamid='.$_GET['id'].'&canvote='.$CanVote.'" style="float: right; margin-right: 10px;">Edit</a>
             </div>
             ';
