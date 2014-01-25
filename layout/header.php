@@ -19,32 +19,32 @@
             if ($ThemeSuggestionsOpen)
             {
                 echo '<li><a ';
-                if ($selected == "suggestions") echo 'class="selected"';
+                if ($selected == "suggestions") echo 'class="selected" ';
                 echo 'href="/suggestions">Theme Suggestions</a></li>';
             }
             if ($ThemeVotingOpen)
             {
                 echo '<li><a ';
-                if ($selected == "voting") echo 'class="selected"';
+                if ($selected == "voting") echo 'class="selected" ';
                 echo 'href="/voting">Theme Voting</a></li>';
             }
             if ($AddGamesActive || $EditGamesActive)
             {
                 echo '<li><a ';
-                if ($selected == "submissions") echo 'class="selected"';
+                if ($selected == "submissions") echo 'class="selected" ';
                 echo 'href="/submissions">Game Submissions</a></li>';
             }
             if ($JamGalleryActive)
             {
                 echo '<li><a ';
-                if ($selected == "previous") echo 'class="selected"';
-                echo 'href="/upcoming">Previous Jam</a></li>';
+                if ($selected == "gallery") echo 'class="selected" ';
+                echo 'href="/gallery">Gallery of Games</a></li>';
             }
             $session = new LoginSession();
             if ($session->GetIsAdmin())
             {
                 echo '<li><a ';
-                if ($selected == "admin") echo 'class="selected"';
+                if ($selected == "admin") echo 'class="selected" ';
                 echo 'href="/admin">Admin</a></li>';
             }
             ?>
