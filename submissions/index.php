@@ -15,18 +15,29 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
     $session = new LoginSession();
     $dbaccess = new DBAccess();
     $userid = $session->GetUserID();
-    $mysqli = $dbaccess->CreateDBConnection();
-    $stmt = $mysqli->prepare("SELECT Name, Description, Partner, SourceLink, ProjectLink, LogoLink, Screen1, Screen2, Screen3, WindowsLink, LinuxLink, OSXLink FROM games WHERE JamID = ? AND UserID = ?;");
-    $stmt->bind_param("ss", $ActiveJamID, $userid);
-    $stmt->execute();
-    $stmt->bind_result($Name, $Description, $Partner, $SourceLink, $ProjectLink, $LogoLink, $Screen1, $Screen2, $Screen3, $WindowsLink, $LinuxLink, $OSXLink);
+    $connection = $dbaccess->CreateDBConnection();
+    $stmt = $connection->prepare("SELECT Name, Description, Partner, SourceLink, ProjectLink, LogoLink, Screen1, Screen2, Screen3, WindowsLink, LinuxLink, OSXLink FROM games WHERE JamID = ? AND UserID = ?;");
+    $stmt->execute(array($ActiveJamID, $userid));
+    $rows = $stmt->fetchAll();
     $cancel = false;
-    if ($stmt->fetch())
+    if ($stmt->rowCount() > 0)
     {
         if ($EditGamesActive)
         {
             echo '<h3>Edit Submission</h3>';
             $button = "Save";
+            $Name = $rows[0]['Name'];
+            $Description = $rows[0]['Description'];
+            $Partner = $rows[0]['Partner'];
+            $SourceLink = $rows[0]['SourceLink'];
+            $ProjectLink = $rows[0]['ProjectLink'];
+            $LogoLink = $rows[0]['LogoLink'];
+            $Screen1 = $rows[0]['Screen1'];
+            $Screen2 = $rows[0]['Screen2'];
+            $Screen3 = $rows[0]['Screen3'];
+            $WindowsLink = $rows[0]['WindowsLink'];
+            $LinuxLink = $rows[0]['LinuxLink'];
+            $OSXLink = $rows[0]['OSXLink'];
         }
         else
         {
@@ -78,7 +89,7 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
         echo '
                 <div id="form-container">
                     <form name="GameSubmissionForm" method="post" action="/submissions/dosubmit.php">
-                        <div class="row"></div>
+                        <br>
                         <div class="row">
                             <h3 style="color: red;">'.htmlspecialchars($error).'<h3>
                         </div>

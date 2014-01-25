@@ -28,19 +28,16 @@ else
     {
         $dbaccess = new DBAccess();
         $userid = $session->GetUserID();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID FROM games WHERE JamID = ? AND UserID = ?;");
-        $stmt->bind_param("ss", $ActiveJamID, $userid);
-        $stmt->execute();
-        $stmt->bind_result($ID);
-        if ($stmt->fetch())
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID FROM games WHERE JamID = ? AND UserID = ?;");
+        $stmt->execute(array($ActiveJamID, $userid));
+        $rows = $stmt->fetchAll();
+        if ($stmt->rowCount() > 0)
         {
             if ($EditGamesActive)
             {
-                $stmt->close();
-                $stmt = $mysqli->prepare("UPDATE games SET Name = ?, Description = ?, Partner = ?, SourceLink = ?, ProjectLink = ?, LogoLink = ?, Screen1 = ?, Screen2 = ?, Screen3 = ?, WindowsLink = ?, LinuxLink = ?, OSXLink = ? WHERE ID = ?;");
-                $stmt->bind_param("sssssssssssss", $Name, $Description, $Partner, $SourceLink, $ProjectLink, $LogoLink, $Screen1, $Screen2, $Screen3, $WindowsLink, $LinuxLink, $OSXLink, $ID);
-                $stmt->execute();
+                $stmt = $connection->prepare("UPDATE games SET Name = ?, Description = ?, Partner = ?, SourceLink = ?, ProjectLink = ?, LogoLink = ?, Screen1 = ?, Screen2 = ?, Screen3 = ?, WindowsLink = ?, LinuxLink = ?, OSXLink = ? WHERE ID = ?;");
+                $stmt->execute(array($Name, $Description, $Partner, $SourceLink, $ProjectLink, $LogoLink, $Screen1, $Screen2, $Screen3, $WindowsLink, $LinuxLink, $OSXLink, $rows[0]['ID']));
                 header("location:/submissions/");
             }
             else
@@ -52,10 +49,8 @@ else
         {
             if ($AddGamesActive)
             {
-                $stmt->close();
-                $stmt = $mysqli->prepare("INSERT INTO games (JamID, UserID, Name, Description, Partner, SourceLink, ProjectLink, LogoLink, Screen1, Screen2, Screen3, WindowsLink, LinuxLink, OSXLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssssssssssss", $ActiveJamID, $userid, $Name, $Description, $Partner, $SourceLink, $ProjectLink, $LogoLink, $Screen1, $Screen2, $Screen3, $WindowsLink, $LinuxLink, $OSXLink);
-                $stmt->execute();
+                $stmt = $connection->prepare("INSERT INTO games (JamID, UserID, Name, Description, Partner, SourceLink, ProjectLink, LogoLink, Screen1, Screen2, Screen3, WindowsLink, LinuxLink, OSXLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute(array($ActiveJamID, $userid, $Name, $Description, $Partner, $SourceLink, $ProjectLink, $LogoLink, $Screen1, $Screen2, $Screen3, $WindowsLink, $LinuxLink, $OSXLink));
                 header("location:/submissions/");
             }
             else
