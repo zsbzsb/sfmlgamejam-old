@@ -47,18 +47,16 @@ class LoginSession
     public function TryRegister($username, $password)
     {
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID FROM users WHERE Username = ?;");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        if ($stmt->fetch()) return false;
-        $stmt->close();
-        $stmt = $mysqli->prepare("INSERT INTO users (Username, Password, Salt) VALUES (?, ?, ?);");
-        $Salt = uniqid('', true);
-        $stmt->bind_param("sss", $username, hash("SHA512", $Salt.$password.$Salt), $Salt);
-        $stmt->execute();
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID FROM users WHERE Username = ?;");
+        $stmt->execute(array($username));
+        $stmt->fetchAll();
+        if ($stmt->rowCount() > 0) return false;
+        $stmt = $connection->prepare("INSERT INTO users (Username, Password, Salt) VALUES (?, ?, ?);");
+        $Salt = uniqid('', true);;
+        $stmt->execute(array($username, hash("SHA512", $Salt.$password.$Salt), $Salt));
         $_SESSION['loggedin'] = true;
-        $_SESSION['userid'] = $mysqli->insert_id;
+        $_SESSION['userid'] = $connection->lastInsertId();
         $_SESSION['username'] = $username;
         $_SESSION['isadmin'] = false;
         return true;
@@ -66,25 +64,23 @@ class LoginSession
     public function TryLogin($username, $password)
     {
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ?;");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->bind_result($ID, $IsAdmin, $HashedPassword, $Salt);
-        if (!$stmt->fetch()) return false;
-        if (hash("SHA512", $Salt.$password.$Salt) != $HashedPassword) return false;
-        if ($Salt == "")
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ?;");
+        $stmt->execute(array($username));
+        $rows = $stmt->fetchAll();
+        echo $stmt->rowCount();
+        if ($stmt->rowCount() == 0) return false;
+        if (hash("SHA512", $rows[0]['Salt'].$password.$rows[0]['Salt']) != $rows[0]['Password']) return false;
+        if ($rows[0]['Salt'] == "")
         {
             $Salt = uniqid('', true);
-            $stmt->close();
-            $stmt = $mysqli->prepare("UPDATE users SET Password = ?, Salt = ? WHERE Username = ?;");
-            $stmt->bind_param("sss", hash("SHA512", $Salt.$password.$Salt), $Salt, $username);
-            $stmt->execute();
+            $stmt = $connection->prepare("UPDATE users SET Password = ?, Salt = ? WHERE Username = ?;");
+            $stmt->execute(array(hash("SHA512", $Salt.$password.$Salt), $Salt, $username));
         }
         $_SESSION['loggedin'] = true;
-        $_SESSION['userid'] = $ID;
+        $_SESSION['userid'] = $rows[0]['ID'];
         $_SESSION['username'] = $username;
-        $_SESSION['isadmin'] = $IsAdmin == 1;
+        $_SESSION['isadmin'] = $rows[0]['IsAdmin'] == 1;
         return true;
     }
     public function Logout()
