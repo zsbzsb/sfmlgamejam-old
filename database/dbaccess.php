@@ -14,7 +14,7 @@ class DBAccess
     }
     public function CreateDBConnection()
     {
-        return new mysqli($this->host, $this->username, $this->password, $this->database);
+        return new PDO('mysql:host='.$this->host.';dbname='.$this->database.';charset=utf8', $this->username, $this->password, array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 }
 ?>

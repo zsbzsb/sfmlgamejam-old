@@ -4,5 +4,6 @@ CREATE TABLE `jams` (
   `BeginTime` text NOT NULL,
   `EndTime` text NOT NULL,
   `ChosenTheme` text NOT NULL,
+  `GalleryOpen` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`)
 )

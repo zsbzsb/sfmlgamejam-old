@@ -3,7 +3,7 @@ CREATE TABLE `themes` (
   `JamID` int(11) NOT NULL,
   `Theme` text NOT NULL,
   `TotalVotes` int(11) NOT NULL,
-  `CanVote` bit(1) NOT NULL DEFAULT b'1',
+  `CanVote` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `JamID_idx` (`JamID`),
