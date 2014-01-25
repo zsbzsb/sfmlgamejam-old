@@ -12,41 +12,33 @@ if (!$session->GetIsLoggedIn() || !$ThemeVotingOpen) header("location:/");
 if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for voting!</h3><br>";
 ?>
 
-<div id="form-container">
     <?php
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
         $session = new LoginSession();
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ThemeID FROM votes WHERE JamID = ? AND UserID = ?;");
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ThemeID FROM votes WHERE JamID = ? AND UserID = ?;");
         $userid = $session->GetUserID();
-        $stmt->bind_param("ss", $ActiveJamID, $userid);
-        $stmt->execute();
-        $stmt->bind_result($ThemeID);
-        $count = 0;
-        while ($stmt->fetch())
-        {
-            $count += 1;
-        }
-        $stmt->close();
-        if ($count < $MaxVotes)
+        $stmt->execute(array($ActiveJamID, $userid));
+        $stmt->fetchAll();
+        if ($stmt->rowCount() < $MaxVotes)
         {
             echo '
+                <div id="form-container">
                 <form name="VoteForm" method="post" action="/voting/dovote.php">
                 <div class="row">
                     <span class="label" style="color: orange;">Theme</span>
                 </div>';
-            $stmt = $mysqli->prepare("SELECT ID, Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
-            $stmt->bind_param("s", $ActiveJamID);
-            $stmt->execute();
-            $stmt->bind_result($ID, $Theme);
-            while ($stmt->fetch())
+            $stmt = $connection->prepare("SELECT ID, Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            foreach ($rows as $row)
             {
                 echo '
                     <div class="row">
-                        <span class="label">'.htmlspecialchars($Theme).'</span>
-                        <input type="radio" name="themeid" value="'.$ID.'" class="radiobutton">
+                        <span class="label">'.htmlspecialchars($row['Theme']).'</span>
+                        <input type="radio" name="themeid" value="'.$row['ID'].'" class="radiobutton">
                     </div>';
             }
             echo '
@@ -58,18 +50,19 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
         else
         {
                 echo '
+                    <h3>You have voted the maximum number of times</h3>
+                    <div id="form-container">
                     <div class="row">
                         <span class="label" style="color: orange;">Theme</span>
                     </div>';
-                $stmt = $mysqli->prepare("SELECT Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
-                $stmt->bind_param("s", $ActiveJamID);
-                $stmt->execute();
-                $stmt->bind_result($Theme, $TotalVotes);
-                while ($stmt->fetch())
+                $stmt = $connection->prepare("SELECT Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
+                $stmt->execute(array($ActiveJamID));
+                $rows = $stmt->fetchAll();
+                foreach ($rows as $row)
                 {
                     echo '
                         <div class="row">
-                            <span class="label">'.htmlspecialchars($Theme).'</span>
+                            <span class="label">'.htmlspecialchars($row['Theme']).'</span>
                         </div>';
                 }
         }

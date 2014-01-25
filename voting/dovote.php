@@ -13,16 +13,12 @@ else
     }
     $themeid = $_POST['themeid'];
     $dbaccess = new DBAccess();
-    $mysqli = $dbaccess->CreateDBConnection();
-    $stmt = $mysqli->prepare("UPDATE themes SET TotalVotes = TotalVotes + 1 WHERE ID = ?;");
-    $stmt->bind_param("s", $themeid);
-    $stmt->execute();
-    $stmt->close();
+    $connection = $dbaccess->CreateDBConnection();
+    $stmt = $connection->prepare("UPDATE themes SET TotalVotes = TotalVotes + 1 WHERE ID = ?;");
+    $stmt->execute(array($themeid));
     $userid = $session->GetUserID();
-    $stmt = $mysqli->prepare("INSERT INTO votes (JamID, ThemeID, UserID) VALUES (?, ?, ?);");
-    $stmt->bind_param("sss", $ActiveJamID, $themeid, $userid);
-    $stmt->execute();
-    $stmt->close();
+    $stmt = $connection->prepare("INSERT INTO votes (JamID, ThemeID, UserID) VALUES (?, ?, ?);");
+    $stmt->execute(array($ActiveJamID, $themeid, $userid));
     header("location:/voting/?voted=1");
 }
 ?>
