@@ -9,7 +9,7 @@ if ($session->GetIsLoggedIn()) header("location:/");
 
 <div id="form-container">
     <form name="RegisterForm" method="post" action="/scripts/doregister.php">
-        <div class="row"></div>
+        <br>
         <div class="row">
             <h3 style="color: red;"><?php if (isset($_GET['error'])) echo htmlspecialchars($_GET['error']); ?><h3>
         </div>
