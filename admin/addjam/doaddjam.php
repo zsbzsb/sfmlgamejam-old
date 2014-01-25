@@ -8,10 +8,9 @@ if ($session->GetIsAdmin())
     $begintime = $_POST['begintime'];
     $endtime = $_POST['endtime'];
     $dbaccess = new DBAccess();
-    $mysqli = $dbaccess->CreateDBConnection();
-    $stmt = $mysqli->prepare("INSERT INTO jams (Title, BeginTime, EndTime, ChosenTheme) VALUES (?, ?, ?, '');");
-    $stmt->bind_param("sss", $title, $begintime, $endtime);
-    $stmt->execute();
+    $connection = $dbaccess->CreateDBConnection();
+    $stmt = $connection->prepare("INSERT INTO jams (Title, BeginTime, EndTime, ChosenTheme, GalleryOpen) VALUES (?, ?, ?, '', 0);");
+    $stmt->execute(array($title, $begintime, $endtime));
     header("location:/admin/viewjams/");
 }
 else

@@ -9,7 +9,7 @@ if (!$session->GetIsAdmin()) header("location:/");
 
 <div id="form-container">
     <form name="AddJamForm" method="post" action="/admin/addjam/doaddjam.php">
-        <div class="row"></div>
+        <br>
         <div class="row">
             <span class="label">Title:</span>
             <input type="text" name="title" value="" class="textbox" />

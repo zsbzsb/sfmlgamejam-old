@@ -7,33 +7,35 @@ if (!$session->GetIsAdmin()) header("location:/");
 
 <h2>View Jams</h2>
 
-<div id="form-container" style="width: 850px;">
+<div id="form-container" style="width: 1100px;">
     <?php
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID, Title, BeginTime, EndTime, ChosenTheme FROM jams;");
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID, Title, BeginTime, EndTime, ChosenTheme, GalleryOpen FROM jams;");
         $stmt->execute();
-        $stmt->bind_result($ID, $Title, $BeginTime, $EndTime, $ChosenTheme);
+        $rows = $stmt->fetchAll();
         echo '
             <div class="row">
-                <span class="label" style="width: 35px; margin: 0px; color: orange;">ID</span>
-                <span class="label" style="width: 175px; margin: 0px; color: orange;">Title</span>
-                <span class="label" style="width: 175px; margin: 0px; color: orange;">Begin Time</span>
-                <span class="label" style="width: 175px; margin: 0px; color: orange;">End Time</span>
-                <span class="label" style="width: 185px; margin: 0px; color: orange;">Chosen Theme</span>
+                <div class="column-header" style="width: 35px;">ID</div>
+                <div class="column-header" style="width: 175px;">Title</div>
+                <div class="column-header" style="width: 225px;">Begin Time</div>
+                <div class="column-header" style="width: 225px;">End Time</div>
+                <div class="column-header" style="width: 185px;">Chosen Theme</div>
+                <div class="column-header" style="width: 175px;">Gallery Open</div>
             </div>
             ';
-        while ($stmt->fetch())
+        foreach ($rows as $row)
         {
             echo '
             <div class="row">
-                <span class="label" style="width: 35px; margin: 0px;">'.$ID.'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($Title).'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($BeginTime).'</span>
-                <span class="label" style="width: 175px; margin: 0px;">'.htmlspecialchars($EndTime).'</span>
-                <span class="label" style="width: 185px; margin: 0px;">'.htmlspecialchars($ChosenTheme).'</span>
-                <a class="link" href="/admin/editjam?id='.$ID.'&title='.$Title.'&begin='.$BeginTime.'&end='.$EndTime.'&chosen='.$ChosenTheme.'" style="float: right; margin-right: 10px;">Edit</a>
+                <div class="column-value" style="width: 35px;">'.$row['ID'].'</div>
+                <div class="column-value" style="width: 175px;">'.htmlspecialchars($row['Title']).'</div>
+                <div class="column-value" style="width: 225px;">'.htmlspecialchars($row['BeginTime']).'</div>
+                <div class="column-value" style="width: 225px;">'.htmlspecialchars($row['EndTime']).'</div>
+                <div class="column-value" style="width: 185px;">'.htmlspecialchars($row['ChosenTheme']).'</div>
+                <div class="column-value" style="width: 175px;">'.$row['GalleryOpen'].'</div>
+                <a class="editlink" href="/admin/editjam/?id='.$row['ID'].'&title='.$row['Title'].'&begin='.$row['BeginTime'].'&end='.$row['EndTime'].'&chosen='.$row['ChosenTheme'].'&gallery='.$row['GalleryOpen'].'">Edit</a>
             </div>
             ';
         }

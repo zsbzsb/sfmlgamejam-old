@@ -8,7 +8,7 @@ if (!$session->GetIsAdmin()) header("location:/");
 <h2>Administrator Functions</h2>
 
 <div id="form-container">
-    <div class="row"></div>
+    <br>
     <div class="row">
         <a class="link" href="/admin/addjam" style="margin-left: 10px;">Add Jam</a>
     </div>

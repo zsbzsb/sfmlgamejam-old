@@ -12,7 +12,7 @@ if (!$session->GetIsAdmin()) header("location:/");
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" />
         <input type="hidden" name="title" value="<?php echo htmlspecialchars($_GET['title']); ?>" />
         <input type="hidden" name="jamid" value="<?php echo htmlspecialchars($_GET['jamid']); ?>" />
-        <div class="row"></div>
+        <br>
         <div class="row">
             <span class="label">Theme:</span>
             <input type="text" name="theme" value="<?php echo htmlspecialchars($_GET['theme']); ?>" class="textbox" />

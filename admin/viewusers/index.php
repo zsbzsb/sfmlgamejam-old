@@ -11,24 +11,24 @@ if (!$session->GetIsAdmin()) header("location:/");
     <?php
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID, Username, IsAdmin FROM users;");
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID, Username, IsAdmin FROM users;");
         $stmt->execute();
-        $stmt->bind_result($ID, $Username, $IsAdmin);
+        $rows = $stmt->fetchAll();
         echo '
             <div class="row">
-                <span class="label" style="width: 35px; margin: 0px; color: orange;">ID</span>
-                <span class="label" style="width: 250px; margin: 0px; color: orange;">Username</span>
-                <span class="label" style="width: 115px; margin: 0px; color: orange;">Is Admin</span>
+                <div class="column-header" style="width: 35px;">ID</div>
+                <div class="column-header" style="width: 250px;">Username</div>
+                <div class="column-header" style="width: 115px;">Is Admin</div>
             </div>
             ';
-        while ($stmt->fetch())
+        foreach ($rows as $row)
         {
             echo '
             <div class="row">
-                <span class="label" style="width: 35px; margin: 0px;">'.$ID.'</span>
-                <span class="label" style="width: 250px; margin: 0px;">'.htmlspecialchars($Username).'</span>
-                <span class="label" style="width: 115px; margin: 0px;">'.$IsAdmin.'</span>
+                <div class="column-value" style="width: 35px;">'.$row['ID'].'</div>
+                <div class="column-value" style="width: 250px;">'.htmlspecialchars($row['Username']).'</div>
+                <div class="column-value" style="width: 115px;">'.$row['IsAdmin'].'</div>
             </div>
             ';
         }
