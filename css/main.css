@@ -108,3 +108,10 @@ h4 {
     color: black;
     font-size: 20px;
 }
+.image {
+    display: block;
+    margin: 0px;
+    float: left;
+    width: 120px;
+    height: 80px;
+}
