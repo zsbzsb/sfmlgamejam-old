@@ -10,13 +10,10 @@ if (!$session->GetIsLoggedIn() || !$ThemeSuggestionsOpen) header("location:/");
 include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
 $dbaccess = new DBAccess();
-$mysqli = $dbaccess->CreateDBConnection();
-$stmt = $mysqli->prepare("SELECT Title FROM jams WHERE ID = ?;");
-$stmt->bind_param("s", $ActiveJamID);
-$stmt->execute();
-$stmt->bind_result($Title);
-$stmt->fetch();
-echo $Title;
+$connection = $dbaccess->CreateDBConnection();
+$stmt = $connection->prepare("SELECT Title FROM jams WHERE ID = ?;");
+$stmt->execute(array($ActiveJamID));
+echo $stmt->fetchAll()[0]['Title'];
 ?></h2>
 
 <?php
@@ -30,18 +27,12 @@ if (isset($_GET['suggested'])) echo "<br><h3>Thanks for suggesting '".htmlspecia
         include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
         $session = new LoginSession();
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ThemeID FROM suggestions WHERE JamID = ? AND UserID = ?;");
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ThemeID FROM suggestions WHERE JamID = ? AND UserID = ?;");
         $userid = $session->GetUserID();
-        $stmt->bind_param("ss", $ActiveJamID, $userid);
-        $stmt->execute();
-        $stmt->bind_result($ThemeID);
-        $count = 0;
-        while ($stmt->fetch())
-        {
-            $count += 1;
-        }
-        if ($count < $MaxSuggestions)
+        $stmt->execute(array($ActiveJamID, $userid));
+        $stmt->fetchAll();
+        if ($stmt->rowCount() < $MaxSuggestions)
         {
             $error = "";
             if (isset($_GET['error'])) $error = $_GET['error'];
@@ -49,12 +40,12 @@ if (isset($_GET['suggested'])) echo "<br><h3>Thanks for suggesting '".htmlspecia
             if (isset($_GET['theme'])) $theme = $_GET['theme'];
             echo '
                 <form name="AddSuggestionForm" method="post" action="/suggestions/doaddsuggestion.php">
-                <div class="row"></div>
+                <br>
                 <div class="row">
                     <h3 style="color: red;">'.$error.'<h3>
                 </div>
                 <div class="row">
-                    <h3>'.$count.'/'.$MaxSuggestions.' Suggestions</h3>
+                    <h3>'.$stmt->rowCount().'/'.$MaxSuggestions.' Suggestions</h3>
                 </div>
                 <div class="row">
                     <span class="label">Suggested Theme:</span>
@@ -71,14 +62,14 @@ if (isset($_GET['suggested'])) echo "<br><h3>Thanks for suggesting '".htmlspecia
         else
         {
                 echo '
-                <div class="row"></div>
+                <br>
                 <div class="row">
                     <h3>You have finished your suggestions</h3>
                 </div>
                 <div class="row">
                     <h3>Please check back soon for voting!</h3>
                 </div>
-                <div class="row"></div>
+                <br>
                 </div>
                 ';
         }

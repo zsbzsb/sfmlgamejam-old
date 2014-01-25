@@ -12,26 +12,28 @@ else
     else
     {
         $dbaccess = new DBAccess();
-        $mysqli = $dbaccess->CreateDBConnection();
-        $stmt = $mysqli->prepare("SELECT ID FROM themes WHERE Theme = ?;");
-        $stmt->bind_param("s", $theme);
-        $stmt->execute();
-        if ($stmt->fetch())
+        $connection = $dbaccess->CreateDBConnection();
+        $stmt = $connection->prepare("SELECT ID FROM themes WHERE Theme = ?;");
+        $stmt->execute(array($theme));
+        $stmt->fetchAll();
+        if ($stmt->rowCount() > 0)
         {
             header("location:/suggestions/?error=This theme has already been suggested&theme=".$theme);
             return;
         }
-        $stmt->close();
-        $stmt = $mysqli->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 1);");
-        $stmt->bind_param("ss", $ActiveJamID, $theme);
-        $stmt->execute();
-        $themeid = $mysqli->insert_id;
-        $stmt->close();
+        $stmt = $connection->prepare("SELECT ThemeID FROM suggestions WHERE JamID = ? AND UserID = ?;");
         $userid = $session->GetUserID();
-        $stmt = $mysqli->prepare("INSERT INTO suggestions (JamID, ThemeID, UserID) VALUES (?, ?, ?);");
-        $stmt->bind_param("sss", $ActiveJamID, $themeid, $userid);
-        $stmt->execute();
-        $stmt->close();
+        $stmt->execute(array($ActiveJamID, $userid));
+        $stmt->fetchAll();
+        if ($stmt->rowCount() < $MaxSuggestions)
+        {
+            header("location:/suggestions/");
+        }
+        $stmt = $connection->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 1);");
+        $stmt->execute(array($ActiveJamID, $theme));
+        $themeid = $connection->lastInsertId();
+        $stmt = $connection->prepare("INSERT INTO suggestions (JamID, ThemeID, UserID) VALUES (?, ?, ?);");
+        $stmt->execute(array($ActiveJamID, $themeid, $userid));
         header("location:/suggestions/?suggested=".$theme);
     }
 }
