@@ -68,7 +68,6 @@ class LoginSession
         $stmt = $connection->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ?;");
         $stmt->execute(array($username));
         $rows = $stmt->fetchAll();
-        echo $stmt->rowCount();
         if ($stmt->rowCount() == 0) return false;
         if (hash("SHA512", $rows[0]['Salt'].$password.$rows[0]['Salt']) != $rows[0]['Password']) return false;
         if ($rows[0]['Salt'] == "")
