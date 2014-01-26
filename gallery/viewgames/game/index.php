@@ -13,6 +13,9 @@ if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
         return;
     }
     include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
+    $session = new LoginSession();
+    if ($session->GetIsAdmin()) echo '<h4><a class="link" target="_blank" style="font-size: 10px;" href="/admin/editgame/?id='.$_GET['id'].'">Admin Edit</a></h4>';
     $dbaccess = new DBAccess();
     $connection = $dbaccess->CreateDBConnection();
     $stmt = $connection->prepare("SELECT gm.Name, gm.Description, gm.Partner, gm.SourceLink, gm.ProjectLink, gm.LogoLink, gm.Screen1, gm.Screen2, gm.Screen3, gm.WindowsLink, gm.LinuxLink, gm.OSXLink, usr.Username FROM games AS gm JOIN users AS usr ON gm.UserID = usr.ID JOIN jams AS jm ON gm.JamID = jm.ID WHERE gm.ID = ? AND jm.GalleryOpen = 1;");
@@ -23,7 +26,6 @@ if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
         header("location:/");
         return;
     }
-    // $rows[0]['']
     if ($rows[0]['LogoLink'] != "") echo '<img class="large-image" alt="" src="'.$rows[0]['LogoLink'].'" />';
     echo '<h2>'.$rows[0]['Name'].'</h2><br>';
     if ($rows[0]['Partner'] == "") echo '<h3>Developed by '.htmlspecialchars($rows[0]['Username']).'</h3>';
