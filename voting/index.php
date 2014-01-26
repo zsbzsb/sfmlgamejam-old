@@ -9,6 +9,13 @@ if (!$session->GetIsLoggedIn() || !$ThemeVotingOpen) header("location:/");
 <h2>Vote on Themes</h2>
 
 <?php
+if (isset($_GET['error']))
+{
+    echo '<br><h3 style="color: red;">'.htmlspecialchars($_GET['error']).'</h3><br>';
+}
+?>
+
+<?php
 if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for voting!</h3><br>";
 ?>
 

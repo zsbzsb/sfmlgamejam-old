@@ -14,6 +14,23 @@ else
     $themeid = $_POST['themeid'];
     $dbaccess = new DBAccess();
     $connection = $dbaccess->CreateDBConnection();
+    $stmt = $connection->prepare("SELECT ThemeID FROM votes WHERE JamID = ? AND UserID = ?;");
+    $userid = $session->GetUserID();
+    $stmt->execute(array($ActiveJamID, $userid));
+    $rows = $stmt->fetchAll();
+    if ($stmt->rowCount() >= $MaxVotes)
+    {
+        header("location:/voting/");
+        return;
+    }
+    foreach ($rows as $row)
+    {
+        if ($row['ThemeID'] == $themeid)
+        {
+            header("location:/voting/?error=You may only vote once per theme");
+            return;
+        }
+    }
     $stmt = $connection->prepare("UPDATE themes SET TotalVotes = TotalVotes + 1 WHERE ID = ?;");
     $stmt->execute(array($themeid));
     $userid = $session->GetUserID();

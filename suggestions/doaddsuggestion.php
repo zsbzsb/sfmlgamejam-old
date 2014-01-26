@@ -13,8 +13,8 @@ else
     {
         $dbaccess = new DBAccess();
         $connection = $dbaccess->CreateDBConnection();
-        $stmt = $connection->prepare("SELECT ID FROM themes WHERE Theme = ?;");
-        $stmt->execute(array($theme));
+        $stmt = $connection->prepare("SELECT ID FROM themes WHERE Theme = ? AND JamID = ?;");
+        $stmt->execute(array($theme, $ActiveJamID));
         $stmt->fetchAll();
         if ($stmt->rowCount() > 0)
         {
@@ -25,9 +25,10 @@ else
         $userid = $session->GetUserID();
         $stmt->execute(array($ActiveJamID, $userid));
         $stmt->fetchAll();
-        if ($stmt->rowCount() < $MaxSuggestions)
+        if ($stmt->rowCount() >= $MaxSuggestions)
         {
             header("location:/suggestions/");
+            return;
         }
         $stmt = $connection->prepare("INSERT INTO themes (JamID, Theme, TotalVotes, CanVote) VALUES (?, ?, 0, 1);");
         $stmt->execute(array($ActiveJamID, $theme));

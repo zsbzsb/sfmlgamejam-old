@@ -13,7 +13,8 @@ $dbaccess = new DBAccess();
 $connection = $dbaccess->CreateDBConnection();
 $stmt = $connection->prepare("SELECT Title FROM jams WHERE ID = ?;");
 $stmt->execute(array($ActiveJamID));
-echo $stmt->fetchAll()[0]['Title'];
+$rows = $stmt->fetchAll();
+echo $rows[0]['Title'];
 ?></h2>
 
 <?php

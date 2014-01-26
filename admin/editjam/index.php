@@ -13,6 +13,7 @@ if (!$session->GetIsAdmin()) header("location:/");
         <br>
         <div class="row">
             <a class="link" href="/admin/viewthemes?id=<?php echo $_GET['id']; ?>&title=<?php echo $_GET['title']; ?>" style="margin-left: 10px;">View Themes</a>
+            |
             <a class="link" href="/admin/addtheme?id=<?php echo $_GET['id']; ?>&title=<?php echo $_GET['title']; ?>" style="margin-left: 10px;">Add Theme</a>
         </div>
         <div class="row">
