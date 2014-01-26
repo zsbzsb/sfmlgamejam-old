@@ -64,7 +64,7 @@
             $rows = $stmt->fetchAll();
             echo '<br><h3>The '.$rows[0]['Title'].' is now complete</h3>';
             echo '<br><h3>I hope you finished those games...</h3>';
-            echo '<br><h3>Remember you can still work on cleaning up those game submissions</h3>';
+            echo '<br><h3>Oh, and you better get those game submissions in!</h3>';
         }
     }
 ?>
