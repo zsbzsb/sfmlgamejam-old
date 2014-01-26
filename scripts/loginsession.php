@@ -52,9 +52,9 @@ class LoginSession
         $stmt->execute(array($username));
         $stmt->fetchAll();
         if ($stmt->rowCount() > 0) return false;
-        $stmt = $connection->prepare("INSERT INTO users (Username, Password, Salt) VALUES (?, ?, ?);");
+        $stmt = $connection->prepare("INSERT INTO users (Username, Password, Salt, LastIP) VALUES (?, ?, ?, ?);");
         $Salt = uniqid('', true);;
-        $stmt->execute(array($username, hash("SHA512", $Salt.$password.$Salt), $Salt));
+        $stmt->execute(array($username, hash("SHA512", $Salt.$password.$Salt), $Salt), $_SERVER['REMOTE_ADDR']);
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $connection->lastInsertId();
         $_SESSION['username'] = $username;
@@ -65,7 +65,7 @@ class LoginSession
     {
         $dbaccess = new DBAccess();
         $connection = $dbaccess->CreateDBConnection();
-        $stmt = $connection->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ?;");
+        $stmt = $connection->prepare("SELECT ID, IsAdmin, Password, Salt FROM users WHERE Username = ? AND IsBanned = 0;");
         $stmt->execute(array($username));
         $rows = $stmt->fetchAll();
         if ($stmt->rowCount() == 0) return false;
@@ -73,8 +73,13 @@ class LoginSession
         if ($rows[0]['Salt'] == "")
         {
             $Salt = uniqid('', true);
-            $stmt = $connection->prepare("UPDATE users SET Password = ?, Salt = ? WHERE Username = ?;");
-            $stmt->execute(array(hash("SHA512", $Salt.$password.$Salt), $Salt, $username));
+            $stmt = $connection->prepare("UPDATE users SET Password = ?, Salt = ?, LastIP = ? WHERE Username = ?;");
+            $stmt->execute(array(hash("SHA512", $Salt.$password.$Salt), $Salt, $_SERVER['REMOTE_ADDR'], $username));
+        }
+        else
+        {
+            $stmt = $connection->prepare("UPDATE users SET LastIP = ? WHERE Username = ?;");
+            $stmt->execute(array($_SERVER['REMOTE_ADDR'], $username));
         }
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $rows[0]['ID'];
