@@ -63,7 +63,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
                     <div class="row">
                         <span class="label" style="color: orange;">Theme</span>
                     </div>';
-                $stmt = $connection->prepare("SELECT Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
+                $stmt = $connection->prepare("SELECT Theme FROM themes WHERE JamID = ? AND CanVote = 1 ORDER BY Theme ASC;");
                 $stmt->execute(array($ActiveJamID));
                 $rows = $stmt->fetchAll();
                 foreach ($rows as $row)
