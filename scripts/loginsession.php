@@ -54,7 +54,7 @@ class LoginSession
         if ($stmt->rowCount() > 0) return false;
         $stmt = $connection->prepare("INSERT INTO users (Username, Password, Salt, LastIP) VALUES (?, ?, ?, ?);");
         $Salt = uniqid('', true);;
-        $stmt->execute(array($username, hash("SHA512", $Salt.$password.$Salt), $Salt), $_SERVER['REMOTE_ADDR']);
+        $stmt->execute(array($username, hash("SHA512", $Salt.$password.$Salt), $Salt, $_SERVER['REMOTE_ADDR']));
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $connection->lastInsertId();
         $_SESSION['username'] = $username;
