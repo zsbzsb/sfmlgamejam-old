@@ -44,7 +44,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
             foreach ($rows as $row)
             {
                 echo '
-                    <div class="row">
+                    <div class="row" style="border-top: 1px solid black;">
                         <span class="label">'.htmlspecialchars($row['Theme']).'</span>
                         <input type="radio" name="themeid" value="'.$row['ID'].'" class="radiobutton">
                     </div>';
