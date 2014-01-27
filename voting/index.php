@@ -40,6 +40,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
             $stmt = $connection->prepare("SELECT ID, Theme FROM themes WHERE JamID = ? AND CanVote = 1;");
             $stmt->execute(array($ActiveJamID));
             $rows = $stmt->fetchAll();
+            shuffle($rows);
             foreach ($rows as $row)
             {
                 echo '
