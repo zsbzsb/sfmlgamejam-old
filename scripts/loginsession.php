@@ -69,7 +69,13 @@ class LoginSession
         $stmt->execute(array($username));
         $rows = $stmt->fetchAll();
         if ($stmt->rowCount() == 0) return false;
-        if (hash("SHA512", $rows[0]['Salt'].$password.$rows[0]['Salt']) != $rows[0]['Password']) return false;
+        if ($rows[0]['Password'] == "")
+        {
+            $Salt = uniqid('', true);
+            $stmt = $connection->prepare("UPDATE users SET Password = ?, Salt = ?, LastIP = ? WHERE Username = ?;");
+            $stmt->execute(array(hash("SHA512", $Salt.$password.$Salt), $Salt, $_SERVER['REMOTE_ADDR'], $username));
+        }
+        else if (hash("SHA512", $rows[0]['Salt'].$password.$rows[0]['Salt']) != $rows[0]['Password']) return false;
         if ($rows[0]['Salt'] == "")
         {
             $Salt = uniqid('', true);
