@@ -26,6 +26,7 @@ if ($session->GetIsLoggedIn()) header("location:/");
             <input type="password" name="confirmpassword" value="" class="textbox" />
         </div>
         <div class="row">
+            <span class="label" style="font-size: 13px; margin-top: 6px;">I have read and accepted the <a class="link" target="_blank" href="/terms" style="font-size: 13px; margin: 0px; margin-top: 6px;">Terms of Use</a></span>
             <input type="submit" value="Register" class="button" />
         </div>
     </form>

@@ -13,45 +13,51 @@
             <li>
                 <a <?php if ($selected == "home") {echo 'class="selected"';} ?> href="/">Home</a>
             </li>
+            <li>
+                <a <?php if ($selected == "rules") {echo 'class="selected"';} ?> href="/rules">Rules</a>
+            </li>
             <?php
             include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
             include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
-            if ($ThemeSuggestionsOpen)
-            {
-                echo '<li><a ';
-                if ($selected == "suggestions") echo 'class="selected" ';
-                echo 'href="/suggestions">Theme Suggestions</a></li>';
-            }
-            if ($ThemeVotingOpen)
-            {
-                echo '<li><a ';
-                if ($selected == "voting") echo 'class="selected" ';
-                echo 'href="/voting">Theme Voting</a></li>';
-            }
-            if ($AddGamesActive || $EditGamesActive)
-            {
-                echo '<li><a ';
-                if ($selected == "submissions") echo 'class="selected" ';
-                echo 'href="/submissions">Game Submissions</a></li>';
-            }
-            if ($ThemeResultsVisible)
-            {
-                echo '<li><a ';
-                if ($selected == "results") echo 'class="selected" ';
-                echo 'href="/results">Theme Results</a></li>';
-            }
-            if ($JamGalleryActive)
-            {
-                echo '<li><a ';
-                if ($selected == "gallery") echo 'class="selected" ';
-                echo 'href="/gallery">Gallery of Games</a></li>';
-            }
             $session = new LoginSession();
-            if ($session->GetIsAdmin())
+            if ($session->GetIsLoggedIn())
             {
-                echo '<li><a ';
-                if ($selected == "admin") echo 'class="selected" ';
-                echo 'href="/admin">Admin</a></li>';
+                if ($ThemeSuggestionsOpen)
+                {
+                    echo '<li><a ';
+                    if ($selected == "suggestions") echo 'class="selected" ';
+                    echo 'href="/suggestions">Theme Suggestions</a></li>';
+                }
+                if ($ThemeVotingOpen)
+                {
+                    echo '<li><a ';
+                    if ($selected == "voting") echo 'class="selected" ';
+                    echo 'href="/voting">Theme Voting</a></li>';
+                }
+                if ($AddGamesActive || $EditGamesActive)
+                {
+                    echo '<li><a ';
+                    if ($selected == "submissions") echo 'class="selected" ';
+                    echo 'href="/submissions">Game Submissions</a></li>';
+                }
+                if ($ThemeResultsVisible)
+                {
+                    echo '<li><a ';
+                    if ($selected == "results") echo 'class="selected" ';
+                    echo 'href="/results">Theme Results</a></li>';
+                }
+                if ($JamGalleryActive)
+                {
+                    echo '<li><a ';
+                    if ($selected == "gallery") echo 'class="selected" ';
+                    echo 'href="/gallery">Gallery of Games</a></li>';
+                }
+                if ($session->GetIsAdmin())
+                {
+                    echo '<li><a ';
+                    if ($selected == "admin") echo 'class="selected" ';
+                    echo 'href="/admin">Admin</a></li>';
+                }
             }
             ?>
         </ul>
