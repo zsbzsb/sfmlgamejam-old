@@ -12,7 +12,7 @@ if (!$session->GetIsAdmin()) header("location:/");
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         $dbaccess = new DBAccess();
         $connection = $dbaccess->CreateDBConnection();
-        $stmt = $connection->prepare("SELECT thm.ID, thm.Theme, thm.TotalVotes, thm.CanVote, usr.Username FROM themes AS thm LEFT OUTER JOIN suggestions AS sug ON sug.ThemeID = thm.ID LEFT OUTER JOIN users AS usr ON usr.ID = sug.UserID WHERE thm.JamID = ?;");
+        $stmt = $connection->prepare("SELECT thm.ID, thm.Theme, thm.TotalVotes, thm.CanVote, usr.Username FROM themes AS thm LEFT OUTER JOIN suggestions AS sug ON sug.ThemeID = thm.ID LEFT OUTER JOIN users AS usr ON usr.ID = sug.UserID WHERE thm.JamID = ? ORDER BY thm.TotalVotes, thm.Theme ASC;");
         $stmt->execute(array($_GET['id']));
         $rows = $stmt->fetchAll();
         echo '
