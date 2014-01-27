@@ -33,6 +33,7 @@ else
     else if ($Screen1 == "") header("location:/submissions/?error=Screenshot 1 Link cannot be blank&name=".$Name."&description=".$Description."&partner=".$Partner."&sourcelink=".$SourceLink."&projectlink=".$ProjectLink."&logolink=".$LogoLink."&ss1=".$Screen1."&ss2=".$Screen2."&ss3=".$Screen3."&windows=".$WindowsLink."&linux=".$LinuxLink."&osx=".$OSXLink);
     else if (strlen($Name) > 20) header("location:/submissions/?error=Name max length is 20 characters&name=".$Name."&description=".$Description."&partner=".$Partner."&sourcelink=".$SourceLink."&projectlink=".$ProjectLink."&logolink=".$LogoLink."&ss1=".$Screen1."&ss2=".$Screen2."&ss3=".$Screen3."&windows=".$WindowsLink."&linux=".$LinuxLink."&osx=".$OSXLink);
     else if (strlen($Partner) > 20) header("location:/submissions/?error=Partner max length is 20 characters&name=".$Name."&description=".$Description."&partner=".$Partner."&sourcelink=".$SourceLink."&projectlink=".$ProjectLink."&logolink=".$LogoLink."&ss1=".$Screen1."&ss2=".$Screen2."&ss3=".$Screen3."&windows=".$WindowsLink."&linux=".$LinuxLink."&osx=".$OSXLink);
+    else if ($WindowsLink == "" && $LinuxLink == "" && $OSXLink == "") header("location:/submissions/?error=You must include atleast one link to an executable&name=".$Name."&description=".$Description."&partner=".$Partner."&sourcelink=".$SourceLink."&projectlink=".$ProjectLink."&logolink=".$LogoLink."&ss1=".$Screen1."&ss2=".$Screen2."&ss3=".$Screen3."&windows=".$WindowsLink."&linux=".$LinuxLink."&osx=".$OSXLink);
     else
     {
         $dbaccess = new DBAccess();
