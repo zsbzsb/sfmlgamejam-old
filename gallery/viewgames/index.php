@@ -24,7 +24,7 @@ if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
         return;
     }
     $title = $rows[0]['Title'];
-    $stmt = $connection->prepare("SELECT gm.ID, gm.Name, gm.LogoLink, gm.Screen1, gm.Partner, usr.Username FROM games AS gm JOIN users AS usr ON gm.UserID = usr.ID WHERE gm.JamID = ?;");
+    $stmt = $connection->prepare("SELECT gm.ID, gm.Name, gm.LogoLink, gm.Screen1, gm.Partner, usr.Username FROM games AS gm JOIN users AS usr ON gm.UserID = usr.ID WHERE gm.JamID = ? ORDER BY gm.Name ASC;");
     $stmt->execute(array($_GET['id']));
     $rows = $stmt->fetchAll();
     echo '<h2>View Games for the '.$title.'</h2>';
