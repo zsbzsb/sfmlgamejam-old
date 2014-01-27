@@ -34,6 +34,12 @@
                 if ($selected == "submissions") echo 'class="selected" ';
                 echo 'href="/submissions">Game Submissions</a></li>';
             }
+            if ($ThemeResultsVisible)
+            {
+                echo '<li><a ';
+                if ($selected == "results") echo 'class="selected" ';
+                echo 'href="/results">Theme Results</a></li>';
+            }
             if ($JamGalleryActive)
             {
                 echo '<li><a ';

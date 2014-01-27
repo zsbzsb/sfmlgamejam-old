@@ -39,6 +39,15 @@
                 echo '<br><h3>It will begin on '.$rows[0]['BeginTime'].' with theme selection a few weeks earlier</h3>';
             }
         }
+        else if ($WaitingOnTheme)
+        {
+            $stmt = $connection->prepare("SELECT Title, BeginTime FROM jams WHERE ID = ?;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            echo '<br><h3>The theme will be announced for the '.$rows[0]['Title'].' in just a short while</h3>';
+            echo '<br><h3>Keep watching this page for the theme announcement</h3>';
+            echo '<br><h3>Oh, and for the billionth time, the jam will begin on '.$rows[0]['BeginTime'].'</h3>';
+        }
         else if ($ThemeVisible)
         {
             $stmt = $connection->prepare("SELECT Title, ChosenTheme, BeginTime FROM jams WHERE ID = ?;");
