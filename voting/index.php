@@ -58,7 +58,7 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
         else
         {
                 echo '
-                    <h3>You have voted the maximum number of times</h3>
+                    <br><h3>You have voted the maximum number of times</h3>
                     <div id="form-container">
                     <div class="row">
                         <span class="label" style="color: orange;">Theme</span>
