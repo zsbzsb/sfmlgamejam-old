@@ -76,4 +76,6 @@ if (isset($_GET['voted']) && $_GET['voted'] == "1") echo "<br><h3>Thanks for vot
     ?>
 </div>
 
+<br><h4>Use of multiple accounts (sock puppets) to influence results is strongly prohibited</h4>
+
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>
