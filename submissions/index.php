@@ -97,9 +97,9 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
                             <span class="label">Name*:</span>
                             <input type="text" name="name" value="'.htmlspecialchars($Name).'" class="textbox" />
                         </div>
-                        <div class="row">
-                            <span class="label">Description*:</span>
-                            <input type="text" name="description" value="'.htmlspecialchars($Description).'" class="textbox" />
+                        <div class="row" style="padding-bottom: 10px;">
+                            <span class="label">Description*^:</span>
+                            <textarea type="text" name="description" class="textbox" style="height: 180px;">'.htmlspecialchars($Description).'</textarea>
                         </div>
                         <div class="row">
                             <span class="label">Partner:</span>
@@ -148,6 +148,7 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
                 </div>
                 <br><h4>No offensive/vulgar/inappropriate names</h4>
                 <h4>*Required data</h4>
+                <h4>^Supports basic BBCode tags</h4>
             ';
     }
 ?>

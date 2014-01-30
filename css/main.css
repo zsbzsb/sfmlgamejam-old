@@ -108,6 +108,13 @@ h4 {
     color: black;
     font-size: 20px;
 }
+.text a {
+    color: blue;
+    text-decoration: none;
+}
+.text a:hover {
+    color: orange;
+}
 .small-image {
     display: block;
     margin: 10px auto;

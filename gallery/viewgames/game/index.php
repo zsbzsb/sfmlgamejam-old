@@ -12,6 +12,38 @@ if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
         header("location:/");
         return;
     }
+    function ProcessText($Text)
+    {
+        $txt = htmlspecialchars($Text);
+
+        // Line breaks
+        $txt = str_replace("[br]", "<br>", $txt);
+//        $txt = str_replace("\r\n", "<br>", $txt);
+//        $txt = str_replace("\n\r", "<br>", $txt);
+//        $txt = str_replace("\r", "<br>", $txt);
+//        $txt = str_replace("\n", "<br>", $txt);
+        // Lists
+        $txt = str_replace("[ul]", "<ul>", $txt);
+        $txt = str_replace("[/ul]", "</ul>", $txt);
+        $txt = str_replace("[ol]", "<ol>", $txt);
+        $txt = str_replace("[/ol]", "</ol>", $txt);
+        $txt = str_replace("[li]", "<li>", $txt);
+        $txt = str_replace("[/li]", "</li>", $txt);
+        // Links
+        $txt = str_replace("[url=", "<a href=".'"', $txt);
+        $txt = str_replace("[/url]", "</a>", $txt);
+        // Alignment
+        $txt = str_replace("[left]", "<div style=".'"'."text-align: left;".'"'.">", $txt);
+        $txt = str_replace("[/left]", "</div>", $txt);
+        $txt = str_replace("[right]", "<div style=".'"'."text-align: right;".'"'.">", $txt);
+        $txt = str_replace("[/right]", "</div>", $txt);
+        $txt = str_replace("[center]", "<div style=".'"'."text-align: center;".'"'.">", $txt);
+        $txt = str_replace("[/center]", "</div>", $txt);
+        // Cleanup
+        $txt = str_replace("]", '"'.">", $txt);
+
+        return $txt;
+    }
     include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
     $session = new LoginSession();
@@ -34,7 +66,7 @@ if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
     if ($rows[0]['ProjectLink'] == "") echo '<div style="display: block; float: none; margin: auto; min-height: 1px; width: 800px; text-align: center;"><a class="link" target="_blank"  href="'.$rows[0]['SourceLink'].'">Source Link</a></div>';
     else echo '<div style="display: block; float: none; margin: auto; min-height: 1px; width: 800px; text-align: center;"><a class="link" target="_blank" href="'.$rows[0]['SourceLink'].'">Source Link</a>|<a class="link" target="_blank" href="'.$rows[0]['ProjectLink'].'">Project Link</a></div>';
     echo '<br>';
-    echo '<div style="display: block; float: none; margin: auto; width: 500px; text-align: center;"><p>'.str_replace("\r\n", "<br>", htmlspecialchars(str_replace("<br>", "\r\n", $rows[0]['Description']))).'</p></div>';
+    echo '<div class="text" style="display: block; float: none; margin: auto; width: 500px; text-align: left; font-size: 15px;"><p>'.ProcessText($rows[0]['Description']).'</p></div>';
     echo '<br>';
     echo '<div style="display: block; float: none; margin: auto; min-height: 1px; width: 800px; text-align: center;">';
     $needdel = false;
