@@ -11,7 +11,7 @@ if ($session->GetIsLoggedIn()) header("location:/");
     <form name="LoginForm" method="post" action="/scripts/dologin.php">
         <br>
         <div class="row">
-            <h3 style="color: red;"><?php if (isset($_GET['error'])) echo htmlspecialchars($_GET['error']); ?><h3>
+            <h3 style="color: red;"><?php if (isset($_GET['error'])) echo htmlspecialchars($_GET['error']); ?></h3>
         </div>
         <div class="row">
             <span class="label">Username:</span>
