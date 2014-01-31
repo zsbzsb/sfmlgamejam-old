@@ -38,6 +38,21 @@
                 echo '<br><h3>The '.$rows[0]['Title'].' is around the corner</h3>';
                 echo '<br><h3>It will begin on '.$rows[0]['BeginTime'].' with theme selection a few weeks earlier</h3>';
             }
+            $stmt = $connection->prepare("SELECT CountdownStart FROM jams WHERE ID = ?;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            date_default_timezone_set('UTC');
+            echo '<script src="countdown.js" type="text/javascript"></script>';
+            $tm = strtotime($rows[0]['CountdownStart']);
+            $diff = $tm - time();
+            echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
+                  <script type="application/javascript">
+                        var myCountdown1 = new Countdown({
+                        time: '.$diff.',
+                        width:300, 
+                        height:60,  
+                        rangeHi:"day",
+                        style:"flip" }); </script></div>';
         }
         else if ($WaitingOnTheme)
         {
@@ -47,6 +62,21 @@
             echo '<br><h3>The theme will be announced for the '.$rows[0]['Title'].' in just a short while</h3>';
             echo '<br><h3>Keep watching this page for the theme announcement</h3>';
             echo '<br><h3>Oh, and for the billionth time, the jam will begin on '.$rows[0]['BeginTime'].'</h3>';
+            $stmt = $connection->prepare("SELECT CountdownStart FROM jams WHERE ID = ?;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            date_default_timezone_set('UTC');
+            echo '<script src="countdown.js" type="text/javascript"></script>';
+            $tm = strtotime($rows[0]['CountdownStart']);
+            $diff = $tm - time();
+            echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
+                  <script type="application/javascript">
+                        var myCountdown1 = new Countdown({
+                        time: '.$diff.',
+                        width:300, 
+                        height:60,  
+                        rangeHi:"day",
+                        style:"flip" }); </script></div>';
         }
         else if ($ThemeVisible)
         {
@@ -56,6 +86,21 @@
             echo '<br><h3>The theme has been chosen for '.$rows[0]['Title'].'</h3>';
             echo '<br><h3>Base your game on "'.$rows[0]['ChosenTheme'].'"!</h3>';
             echo '<br><h3>And get ready to rumble....<br> The jam will begin on '.$rows[0]['BeginTime'].'</h3>';
+            $stmt = $connection->prepare("SELECT CountdownStart FROM jams WHERE ID = ?;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            date_default_timezone_set('UTC');
+            echo '<script src="countdown.js" type="text/javascript"></script>';
+            $tm = strtotime($rows[0]['CountdownStart']);
+            $diff = $tm - time();
+            echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
+                  <script type="application/javascript">
+                        var myCountdown1 = new Countdown({
+                        time: '.$diff.',
+                        width:300, 
+                        height:60,  
+                        rangeHi:"day",
+                        style:"flip" }); </script></div>';
         }
         else if ($JamRunning)
         {
@@ -65,6 +110,21 @@
             echo '<br><h3>The '.$rows[0]['Title'].' is now in progress!</h3>';
             echo '<br><h3>Get a move on it and base your game on "'.$rows[0]['ChosenTheme'].'"!</h3>';
             echo '<br><h3>Don'."'".'t forget the jam and all submissions will end on '.$rows[0]['EndTime'].'</h3>';
+            $stmt = $connection->prepare("SELECT CountdownEnd FROM jams WHERE ID = ?;");
+            $stmt->execute(array($ActiveJamID));
+            $rows = $stmt->fetchAll();
+            date_default_timezone_set('UTC');
+            echo '<script src="countdown.js" type="text/javascript"></script>';
+            $tm = strtotime($rows[0]['CountdownEnd']);
+            $diff = $tm - time();
+            echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
+                  <script type="application/javascript">
+                        var myCountdown1 = new Countdown({
+                        time: '.$diff.',
+                        width:300, 
+                        height:60,  
+                        rangeHi:"day",
+                        style:"flip" }); </script></div>';
         }
         else if ($JamCompleted)
         {
