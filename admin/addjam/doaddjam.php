@@ -9,7 +9,7 @@ if ($session->GetIsAdmin())
     $endtime = $_POST['endtime'];
     $dbaccess = new DBAccess();
     $connection = $dbaccess->CreateDBConnection();
-    $stmt = $connection->prepare("INSERT INTO jams (Title, BeginTime, EndTime, ChosenTheme, GalleryOpen) VALUES (?, ?, ?, '', 0);");
+    $stmt = $connection->prepare("INSERT INTO jams (Title, BeginTime, EndTime, ChosenTheme, CountdownStart, CountdownEnd, GalleryOpen) VALUES (?, ?, ?, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);");
     $stmt->execute(array($title, $begintime, $endtime));
     header("location:/admin/viewjams/");
 }

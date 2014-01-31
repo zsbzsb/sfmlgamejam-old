@@ -33,6 +33,14 @@ if (!$session->GetIsAdmin()) header("location:/");
             <input type="text" name="chosentheme" value="<?php echo htmlspecialchars($_GET['chosen']); ?>" class="textbox" />
         </div>
         <div class="row">
+            <span class="label">Countdown Start:</span>
+            <input type="text" name="countdownstart" value="<?php echo htmlspecialchars($_GET['ctstart']); ?>" class="textbox" />
+        </div>
+        <div class="row">
+            <span class="label">Countdown End:</span>
+            <input type="text" name="countdownend" value="<?php echo htmlspecialchars($_GET['ctend']); ?>" class="textbox" />
+        </div>
+        <div class="row">
             <span class="label">Gallery Open:</span>
             <input type="checkbox" name="galleryopen" class="checkbox" <?php if ($_GET['gallery'] == "1") echo 'checked'; ?> />
         </div>

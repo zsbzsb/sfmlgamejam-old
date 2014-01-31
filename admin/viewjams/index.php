@@ -12,7 +12,7 @@ if (!$session->GetIsAdmin()) header("location:/");
         include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
         $dbaccess = new DBAccess();
         $connection = $dbaccess->CreateDBConnection();
-        $stmt = $connection->prepare("SELECT ID, Title, BeginTime, EndTime, ChosenTheme, GalleryOpen FROM jams;");
+        $stmt = $connection->prepare("SELECT ID, Title, BeginTime, EndTime, CountdownStart, CountdownEnd, ChosenTheme, GalleryOpen FROM jams;");
         $stmt->execute();
         $rows = $stmt->fetchAll();
         echo '
@@ -35,7 +35,7 @@ if (!$session->GetIsAdmin()) header("location:/");
                 <div class="column-value" style="width: 225px;">'.htmlspecialchars($row['EndTime']).'</div>
                 <div class="column-value" style="width: 185px;">'.htmlspecialchars($row['ChosenTheme']).'</div>
                 <div class="column-value" style="width: 175px;">'.$row['GalleryOpen'].'</div>
-                <a class="editlink" href="/admin/editjam/?id='.$row['ID'].'&title='.$row['Title'].'&begin='.$row['BeginTime'].'&end='.$row['EndTime'].'&chosen='.$row['ChosenTheme'].'&gallery='.$row['GalleryOpen'].'">Edit</a>
+                <a class="editlink" href="/admin/editjam/?id='.$row['ID'].'&title='.$row['Title'].'&begin='.$row['BeginTime'].'&end='.$row['EndTime'].'&chosen='.$row['ChosenTheme'].'&gallery='.$row['GalleryOpen'].'&ctstart='.$row['CountdownStart'].'&ctend='.$row['CountdownEnd'].'">Edit</a>
             </div>
             ';
         }
