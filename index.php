@@ -45,13 +45,15 @@
             echo '<script src="countdown.js" type="text/javascript"></script>';
             $tm = strtotime($rows[0]['CountdownStart']);
             $diff = $tm - time();
+            $hi = "hour";
+            if ($diff >= 86400) $hi = "day";
             echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
                   <script type="application/javascript">
-                        var myCountdown1 = new Countdown({
+                        var countdown = new Countdown({
                         time: '.$diff.',
-                        width:300, 
+                        width:240, 
                         height:60,  
-                        rangeHi:"day",
+                        rangeHi:"'.$hi.'",
                         style:"flip" }); </script></div>';
         }
         else if ($WaitingOnTheme)
@@ -69,13 +71,15 @@
             echo '<script src="countdown.js" type="text/javascript"></script>';
             $tm = strtotime($rows[0]['CountdownStart']);
             $diff = $tm - time();
+            $hi = "hour";
+            if ($diff >= 86400) $hi = "day";
             echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
                   <script type="application/javascript">
-                        var myCountdown1 = new Countdown({
+                        var countdown = new Countdown({
                         time: '.$diff.',
-                        width:300, 
+                        width:240, 
                         height:60,  
-                        rangeHi:"day",
+                        rangeHi:"'.$hi.'",
                         style:"flip" }); </script></div>';
         }
         else if ($ThemeVisible)
@@ -93,13 +97,15 @@
             echo '<script src="countdown.js" type="text/javascript"></script>';
             $tm = strtotime($rows[0]['CountdownStart']);
             $diff = $tm - time();
+            $hi = "hour";
+            if ($diff >= 86400) $hi = "day";
             echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
                   <script type="application/javascript">
-                        var myCountdown1 = new Countdown({
+                        var countdown = new Countdown({
                         time: '.$diff.',
-                        width:300, 
+                        width:240, 
                         height:60,  
-                        rangeHi:"day",
+                        rangeHi:"'.$hi.'",
                         style:"flip" }); </script></div>';
         }
         else if ($JamRunning)
@@ -117,13 +123,15 @@
             echo '<script src="countdown.js" type="text/javascript"></script>';
             $tm = strtotime($rows[0]['CountdownEnd']);
             $diff = $tm - time();
+            $hi = "hour";
+            if ($diff >= 86400) $hi = "day";
             echo '<div style="display: block; margin: 15px auto; width: 300px; height 60px;">
                   <script type="application/javascript">
-                        var myCountdown1 = new Countdown({
+                        var countdown = new Countdown({
                         time: '.$diff.',
-                        width:300, 
+                        width:240, 
                         height:60,  
-                        rangeHi:"day",
+                        rangeHi:"'.$hi.'",
                         style:"flip" }); </script></div>';
         }
         else if ($JamCompleted)
