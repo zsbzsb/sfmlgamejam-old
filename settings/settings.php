@@ -1,7 +1,7 @@
 <?php
 /* State of the Jam - only 1 may be active at once */
 $NextJamQued = false; // Generally Used with theme selection
-$WaitingOnTheme = false; // Used when voting is finished and before the jam is visible
+$WaitingOnTheme = false; // Used when voting is finished and before the theme is visible
 $ThemeVisible = false; // Used when voting is finished before the jam is running
 $JamRunning = false; // Used with submitting and editing game entries
 $JamCompleted = false; // Used with editing game entries before the next jam
