@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/settings.php';
 $session = new LoginSession();
-if (!$session->GetIsLoggedIn() || !$JamGalleryActive) header("location:/");
+if (!$JamGalleryActive) header("location:/");
 ?>
 <?php $selected = "gallery"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 

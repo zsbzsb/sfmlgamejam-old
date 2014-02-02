@@ -46,18 +46,18 @@
                     if ($selected == "results") echo 'class="selected" ';
                     echo 'href="/results">Theme Results</a></li>';
                 }
-                if ($JamGalleryActive)
-                {
-                    echo '<li><a ';
-                    if ($selected == "gallery") echo 'class="selected" ';
-                    echo 'href="/gallery">Gallery of Games</a></li>';
-                }
                 if ($session->GetIsAdmin())
                 {
                     echo '<li><a ';
                     if ($selected == "admin") echo 'class="selected" ';
                     echo 'href="/admin">Admin</a></li>';
                 }
+            }
+            if ($JamGalleryActive)
+            {
+                echo '<li><a ';
+                if ($selected == "gallery") echo 'class="selected" ';
+                echo 'href="/gallery">Gallery of Games</a></li>';
             }
             ?>
         </ul>
