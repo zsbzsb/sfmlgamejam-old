@@ -124,7 +124,7 @@
             $rows = $stmt->fetchAll();
             echo '<br><h3>The '.$rows[0]['Title'].' is now in progress!</h3>';
             echo '<br><h3>Get a move on it and base your game on "'.$rows[0]['ChosenTheme'].'"!</h3>';
-            echo '<br><h3>Don'."'".'t forget the jam and all submissions will end on '.$rows[0]['EndTime'].'</h3>';
+            echo '<br><h3>Don'."'".'t forget the jam will end on '.$rows[0]['EndTime'].'</h3>';
             if ($CountdownEnabled)
             {
                 $stmt = $connection->prepare("SELECT CountdownEnd FROM jams WHERE ID = ?;");
