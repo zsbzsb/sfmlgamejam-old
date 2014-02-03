@@ -73,17 +73,17 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
     if (!$cancel)
     {
         if (isset($_GET['name'])) $Name = $_GET['name'];
-        if (isset($_GET['description'])) $Description = $_GET['description'];
+        if (isset($_GET['description'])) $Description = urldecode($_GET['description']);
         if (isset($_GET['partner'])) $Partner = $_GET['partner'];
-        if (isset($_GET['sourcelink'])) $SourceLink = $_GET['sourcelink'];
-        if (isset($_GET['projectlink'])) $ProjectLink = $_GET['projectlink'];
-        if (isset($_GET['logolink'])) $LogoLink = $_GET['logolink'];
-        if (isset($_GET['ss1'])) $Screen1 = $_GET['ss1'];
-        if (isset($_GET['ss2'])) $Screen2 = $_GET['ss2'];
-        if (isset($_GET['ss3'])) $Screen3 = $_GET['ss3'];
-        if (isset($_GET['windows'])) $WindowsLink = $_GET['windows'];
-        if (isset($_GET['linux'])) $LinuxLink = $_GET['linux'];
-        if (isset($_GET['osx'])) $OSXLink = $_GET['osx'];
+        if (isset($_GET['sourcelink'])) $SourceLink = urldecode($_GET['sourcelink']);
+        if (isset($_GET['projectlink'])) $ProjectLink = urldecode($_GET['projectlink']);
+        if (isset($_GET['logolink'])) $LogoLink = urldecode($_GET['logolink']);
+        if (isset($_GET['ss1'])) $Screen1 = urldecode($_GET['ss1']);
+        if (isset($_GET['ss2'])) $Screen2 = urldecode($_GET['ss2']);
+        if (isset($_GET['ss3'])) $Screen3 = urldecode($_GET['ss3']);
+        if (isset($_GET['windows'])) urldecode($WindowsLink = $_GET['windows']);
+        if (isset($_GET['linux'])) urldecode($LinuxLink = $_GET['linux']);
+        if (isset($_GET['osx'])) urldecode($OSXLink = $_GET['osx']);
         $error = "";
         if (isset($_GET['error'])) $error = $_GET['error'];
         echo '
@@ -99,7 +99,7 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
                             <span class="label">Description*^:</span>
-                            <textarea type="text" name="description" class="textbox" style="height: 180px;">'.htmlspecialchars(urldecode($Description)).'</textarea>
+                            <textarea type="text" name="description" class="textbox" style="height: 180px;">'.htmlspecialchars($Description).'</textarea>
                         </div>
                         <div class="row">
                             <span class="label">Partner:</span>
