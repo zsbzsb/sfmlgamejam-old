@@ -73,7 +73,7 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
     if (!$cancel)
     {
         if (isset($_GET['name'])) $Name = $_GET['name'];
-        if (isset($_GET['descriptions'])) $Description = $_GET['description'];
+        if (isset($_GET['description'])) $Description = $_GET['description'];
         if (isset($_GET['partner'])) $Partner = $_GET['partner'];
         if (isset($_GET['sourcelink'])) $SourceLink = $_GET['sourcelink'];
         if (isset($_GET['projectlink'])) $ProjectLink = $_GET['projectlink'];
@@ -99,7 +99,7 @@ if (!$session->GetIsLoggedIn() || !($AddGamesActive || $EditGamesActive)) header
                         </div>
                         <div class="row" style="padding-bottom: 10px;">
                             <span class="label">Description*^:</span>
-                            <textarea type="text" name="description" class="textbox" style="height: 180px;">'.htmlspecialchars($Description).'</textarea>
+                            <textarea type="text" name="description" class="textbox" style="height: 180px;">'.htmlspecialchars(urldecode($Description)).'</textarea>
                         </div>
                         <div class="row">
                             <span class="label">Partner:</span>
