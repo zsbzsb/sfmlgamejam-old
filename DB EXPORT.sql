@@ -1,0 +1,652 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.5
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Sep 25, 2014 at 10:18 PM
+-- Server version: 5.5.38-35.2
+-- PHP Version: 5.4.23
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `jebbs_main`
+--
+CREATE DATABASE `jebbs_main` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `jebbs_main`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `games`
+--
+
+CREATE TABLE IF NOT EXISTS `games` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `JamID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `Name` text COLLATE utf8_unicode_ci NOT NULL,
+  `Description` text COLLATE utf8_unicode_ci NOT NULL,
+  `Partner` text COLLATE utf8_unicode_ci NOT NULL,
+  `SourceLink` text COLLATE utf8_unicode_ci NOT NULL,
+  `ProjectLink` text COLLATE utf8_unicode_ci NOT NULL,
+  `LogoLink` text COLLATE utf8_unicode_ci NOT NULL,
+  `Screen1` text COLLATE utf8_unicode_ci NOT NULL,
+  `Screen2` text COLLATE utf8_unicode_ci NOT NULL,
+  `Screen3` text COLLATE utf8_unicode_ci NOT NULL,
+  `WindowsLink` text COLLATE utf8_unicode_ci NOT NULL,
+  `LinuxLink` text COLLATE utf8_unicode_ci NOT NULL,
+  `OSXLink` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `GMFKJamID_idx` (`JamID`),
+  KEY `GMFKUserID_idx` (`UserID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `games`
+--
+
+INSERT INTO `games` (`ID`, `JamID`, `UserID`, `Name`, `Description`, `Partner`, `SourceLink`, `ProjectLink`, `LogoLink`, `Screen1`, `Screen2`, `Screen3`, `WindowsLink`, `LinuxLink`, `OSXLink`) VALUES
+(1, 1, 42, 'Time paradox', 'You have developed a time machine and decided to test it. But something went wrong. Collect all instruments on every level to repair your time machine and return back to the future.\r\n\r\nRun with a and d. Jump with w. You can walljump if you hold w. \r\n\r\nMy first real game with sfml. Used programs are Inkscape, sfxr and my animation editor. Used libs are sfml, jsoncpp and tgui (only was used in editor).\r\n\r\nFeatures:\r\nSkeletal 2d animation,\r\n4 levels,\r\nCrash after your close this game,\r\nNo music,\r\nCool comix', '', 'https://dl.dropboxusercontent.com/u/27482836/source.rar', '', '', 'https://dl.dropboxusercontent.com/u/27482836/screen.PNG', '', '', 'https://dl.dropboxusercontent.com/u/27482836/Time%20paradox.rar', '', ''),
+(2, 1, 34, 'The Loop', 'The basic idea is:\r\nYou have to eat the mushrooms in order to survive.\r\nEvery time you eat a mushroom time loops on itself resulting in a ''clone'' that will copy your the previous movements.\r\nThe challenge is to organize your movements in such a way that the ''clones'' won''t bump into each other.\r\nUse the WASD keys to change the player''s direction.\r\n\r\nThank you tomgalvin for the linux port.', '', 'https://bitbucket.org/1man2kinds/sfml_game_jam', '', '', 'http://i.imgur.com/KF9mW3f.png', 'http://i.imgur.com/g6c1Z4z.png', '', 'http://1man2kinds.com/SFML_Game_Jam', 'http://1man2kinds.com/SFML_Game_Jam_Linux', ''),
+(3, 1, 1, 'ShotWarp', 'ShotWarp was written by Zachariah Brown with music by Elijah Brown (thanks!).\r\n[br][br]\r\nThe basic idea of the game is to shoot arrows into the targets and meet the quota without running out of ammo.\r\n[br][br]\r\nOnce you click "New Game" you will be in the game screen on level one. On the left side you will see times past, on the right side is the future. In the bottom middle triangle is the current time. On the top side is space time, space time is a void in the space time continumn that is outside time.\r\n[br][br]\r\nTo launch an arrow click in the present time area and while holding down your mouse drag in the direction you wish to fire. When you release the mouse an arrow will shoot in the direction you aimed. As the arrow passes through the warp zone into either the past or future zones the arrow will be temporarily suspended in the space time continumn. As soon as the warp is completed your arrow will continue on its path.\r\n[br][br]\r\nThere is also gravity wells, these can either push or pull your arrow. You can easily determine the type of well as gravity wells that push pulse outwards and wells that pull pulse inwards.[br][br]In order to complete the level you must hit the minimum number of targets in each time area. At the top of the screen there will be a display showing the required number of hits for each time area and the current total hits.\r\n[br][br]\r\nKey Features\r\n[ul]\r\n[li]10 Playable Levels[/li]\r\n[li]Awesome background tracks[/li]\r\n[li]Easy controls - all you need is your mouse[/li]\r\n[li]So addicting that you will want to finish it[/li]\r\n[/ul]\r\n[br][br]\r\nThank you for trying ShotWarp and have a great day!\r\n[br][br][br]\r\nPlease note if you receive error messages after unzipping all the files such as "CSFML-XXX.dll could not be loaded" make sure you have the [url=//www.microsoft.com/en-us/download/details.aspx?id=40784]MSVC 2013 x86 Redistributable[/url] installed.', 'Elijah Brown', '//bitbucket.org/zsbzsb/shotwarp', '', '//hashcookie.net/uploads/c9c2bce82b_Logo.png', '//hashcookie.net/uploads/0298e79fde_menu.PNG', '//hashcookie.net/uploads/bf2c0ea072_Level8.png', '', '//hashcookie.net/uploads/8474ff1cf1_ShotWarp.zip', '', ''),
+(4, 1, 14, 'Shielding 114', 'Description:[br]\r\nThis game is a partial reenactment of the 114th incident recorded in the Shielding archives. It is the turning point in the conflict between the Sorrel Empire and the Kairos Federation.[br]\r\n[br]\r\nBackground:[br]\r\nThe Diastolea is one of the core bases of the galactic Sorrel Empire, and one of the few to use a time rift as a defence mechanism. But recently a disruption has caused a weak point to form in the outer shell, and the Kairos plan to use this to their advantage.[br]\r\n[br]\r\nGame Objective:[br]\r\nYour objective is to defend Diastolea at all costs until enough energy is collected to stabilize the outer shell. A miniature artificial time rift has been deployed: time runs faster near its center and slower as you move away from it. Use it to your advantage! Also, your ship has been equipped with a powerful shield and two rapid-fire cannons. Good luck! Do not let Diastolea fall.[br]\r\n[br]\r\nControls:[br]\r\nUse the mouse to point your ship in the direction you want to fire. Use the left mouse button to fire. Use the arrow keys or WSAD to move your ship. Your ship''s health is shown on the status bar on the left, and the energy collected to stablize the outer shell is shown along the bottom.[br]\r\n[br]\r\nNote: the precompiled binary links to SFML dynamically, so you must have SFML installed in order to play the game.[br]\r\n[br]\r\nThanks for playing![br]\r\n[br]\r\n - Thomas Galvin (tomgalvin594@gmail.com)', '', 'https://github.com/tomgalvin594/Shielding_114/archive/master.zip', 'https://github.com/tomgalvin594/Shielding_114', 'https://gist.github.com/tomgalvin594/8779003/raw/5766c83c17d44e217935f1e8167d1881103440b8/logo.png', 'https://gist.github.com/tomgalvin594/8779003/raw/c0b422d954f3511ac424e402298ce771466d2217/Sreenshot_1.png', '', '', '', 'https://gist.github.com/tomgalvin594/8779003/raw/619120179f20a4795973a4cfd0821ea9e91aa2da/shielding.tar.gz', ''),
+(5, 1, 37, 'No name ;)', 'Sadly I haven''t that much time, so the game is far away from being polished, completed this project in 28h realtime = ~13h coding time. . It''s basically a jump and run where you can go back in time. I planned other features but the time :O. \r\n\r\nThe game teaches you how to play. There are 3short levels.', '', 'https://github.com/AlexAUT/SFML-Gamejam2', '', '', 'http://i.imgur.com/4mcNZS8.png', '', '', 'http://crz.se/4572', '', ''),
+(6, 1, 2, 'Chronix', 'You control a Chronix, a multi-dimensional being, capable of time travel. Chronices need crystals for energy so you are out there to collect some!\r\n\r\nWhenever you collect a crystal, you travel back in time somewhere on the map. Beware of your old self. If you are seen by yourself you cause a time paradox and loses.\r\n\r\nThe goal is in other words to collect all crystals on every map and avoid being seen by yourself.\r\n\r\nControls - WSAD for movement and G to walk instead of run.\r\n\r\nWritten using SFML/Feather Kit', '', 'http://tinyurl.com/m3v6437', '', '', 'http://i.imgur.com/ky0m6WX.png', '', '', '', 'http://pallkars.net/~zagabar/chronix.tar.gz', ''),
+(7, 1, 3, 'time shooting thing', 'You have to trap enemies in cages by shooting them into the future!\r\n\r\nCollect time ammo and shoot the enemy into the future, then place a cage where they would appear.\r\n\r\nUse WSAD and mouse.\r\n\r\nFeatures:\r\n - Amazing coding (almost all the game logic in just one file!)\r\n - Just one, one single superduper amazing spectacular action packed level.\r\n - Lots of free bugs :)\r\n\r\nI unfortunately only got around to 10 - 15 hours of coding, but I may work on the game more in the future.', '', 'http://tinyurl.com/l8mb7u9', '', '', 'http://puu.sh/6HG2g.png', '', '', '', 'http://kim.pallkars.net/temp/kimtimetravel', ''),
+(8, 1, 6, 'A Temporary Outbreak', 'It''s you against a world doomed by zombies. However, time is on your side.\r\n\r\n[br][br]Build turrets, barricades and mines to defend the citizens from the zombies. Undo mistakes by travelling to the past, or foresee the outcome by observing the future. The timeline on the bottom represents the causal history of the game, the white rectangle marks the present. Changes to history are committed in regular time steps. Click on the timeline to travel to a certain point in time. Be aware that time travel is not free; so use it wisely.', 'eXpl0it3r', 'https://github.com/Bromeon/TemporaryOutbreak', '', '', 'http://www.bromeon.ch/games/temporary-outbreak/screen1.png', '', '', '//www.bromeon.ch/games/temporary-outbreak/temporary-outbreak-v1.0.7z', '', ''),
+(9, 1, 74, 'LexThree', 'LexThree is a top-down shooter where time only moves when you do. Use WASD to move Bob, our little hero, and aim with the mouse.\r\n\r\nSadly I didn''t have the time to implement half the features I''ve wanted to, like the evil Tank Boss. Might be added in the future.', '', 'http://www.iteem.ch/sfmlgamejam/LexThree-source.zip', '', '', 'http://www.iteem.ch/sfmlgamejam/LexThree-screen1.png', 'http://www.iteem.ch/sfmlgamejam/LexThree-screen2.png', '', '//www.iteem.ch/sfmlgamejam/LexThree-windows.zip', '', ''),
+(10, 2, 2, 'ChromoShift', 'You play as a square which needs to attain a certain colour. By collecting pickups that either raise or lower your colour values in an RGB manner, you need to make sure to become the right colour!\r\n\r\nControls:\r\nSkip splash screen - any key\r\nmove - WSAD\r\nrestart map - R\r\n\r\nThe goal colour is different on every map and can be seen on the edges of the interface. \r\n   You die when you either get less than zero colour value or greater than 255 colour value in either of the r g b components.', 'Kim', 'https://github.com/therocode/chromoshift/releases/tag/SFML-game-jam-result', '', '', 'http://i.imgur.com/684LP86.png', '', '', '//asada', '//asd', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jams`
+--
+
+CREATE TABLE IF NOT EXISTS `jams` (i3xyMji?3Qcd
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` text COLLATE utf8_unicode_ci NOT NULL,
+  `BeginTime` text COLLATE utf8_unicode_ci NOT NULL,
+  `EndTime` text COLLATE utf8_unicode_ci NOT NULL,
+  `ChosenTheme` text COLLATE utf8_unicode_ci NOT NULL,
+  `CountdownStart` text COLLATE utf8_unicode_ci NOT NULL,
+  `CountdownEnd` text COLLATE utf8_unicode_ci NOT NULL,
+  `GalleryOpen` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `jams`
+--
+
+INSERT INTO `jams` (`ID`, `Title`, `BeginTime`, `EndTime`, `ChosenTheme`, `CountdownStart`, `CountdownEnd`, `GalleryOpen`) VALUES
+(1, '2nd SFML Jam', 'January 31st @ 15:00 UTC', 'Feburary 3rd @ 15:00 UTC', 'Time Travel', '2014-01-31 15:00:00 UTC', '2014-02-03 15:00:00 UTC', 1),
+(2, '3rd SFML Jam', 'May 30th @ 15:00 UTC', 'June 2nd @ 15:00 UTC', 'Puzzle', '2014-05-30 15:00:00 UTC', '2014-06-02 15:00:00 UTC', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggestions`
+--
+
+CREATE TABLE IF NOT EXISTS `suggestions` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `JamID` int(11) NOT NULL,
+  `ThemeID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `JamID_idx` (`JamID`),
+  KEY `FKThemeID_idx` (`ThemeID`),
+  KEY `FKUserID_idx` (`UserID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+
+--
+-- Dumping data for table `suggestions`
+--
+
+INSERT INTO `suggestions` (`ID`, `JamID`, `ThemeID`, `UserID`) VALUES
+(1, 1, 1, 5),
+(2, 1, 2, 21),
+(3, 1, 3, 21),
+(4, 1, 4, 1),
+(5, 1, 5, 22),
+(6, 1, 6, 22),
+(7, 1, 7, 14),
+(8, 1, 8, 14),
+(9, 1, 9, 23),
+(10, 1, 10, 23),
+(11, 1, 11, 24),
+(12, 1, 12, 25),
+(13, 1, 13, 26),
+(14, 1, 14, 28),
+(15, 1, 15, 28),
+(16, 1, 16, 29),
+(17, 1, 17, 29),
+(18, 1, 18, 2),
+(19, 1, 19, 2),
+(20, 1, 20, 25),
+(21, 1, 21, 35),
+(22, 1, 22, 35),
+(23, 1, 23, 6),
+(24, 1, 24, 6),
+(25, 1, 25, 37),
+(26, 1, 26, 37),
+(27, 1, 27, 41),
+(28, 1, 28, 43),
+(29, 1, 29, 44),
+(30, 1, 30, 45),
+(31, 1, 31, 45),
+(32, 1, 32, 46),
+(33, 1, 33, 46),
+(34, 1, 34, 4),
+(35, 1, 35, 20),
+(36, 1, 36, 20),
+(37, 1, 37, 43),
+(38, 1, 38, 41),
+(39, 1, 39, 47),
+(40, 1, 40, 50),
+(41, 1, 41, 47),
+(42, 1, 42, 1),
+(43, 1, 43, 54),
+(44, 1, 44, 54),
+(45, 1, 45, 56),
+(46, 1, 46, 56),
+(47, 2, 47, 81),
+(48, 2, 48, 101),
+(49, 2, 49, 101),
+(50, 2, 50, 39),
+(51, 2, 51, 39),
+(52, 2, 52, 6),
+(53, 2, 53, 6),
+(54, 2, 54, 102),
+(55, 2, 55, 102),
+(56, 2, 56, 20),
+(57, 2, 57, 20),
+(58, 2, 58, 103),
+(59, 2, 59, 103),
+(60, 2, 60, 21),
+(61, 2, 61, 21),
+(62, 2, 62, 63),
+(63, 2, 63, 63),
+(64, 2, 64, 80),
+(65, 2, 65, 80),
+(66, 2, 66, 49),
+(67, 2, 67, 49),
+(68, 2, 68, 105),
+(69, 2, 69, 105),
+(70, 2, 70, 76),
+(71, 2, 71, 76),
+(72, 2, 72, 108),
+(73, 2, 73, 108),
+(74, 2, 74, 1),
+(75, 2, 75, 1),
+(76, 2, 76, 41),
+(77, 2, 77, 41),
+(78, 2, 78, 26),
+(79, 2, 79, 26),
+(80, 2, 80, 100),
+(81, 2, 81, 100),
+(82, 2, 82, 107),
+(83, 2, 83, 107),
+(84, 2, 84, 111),
+(85, 2, 85, 111),
+(86, 2, 86, 60),
+(87, 2, 87, 60),
+(88, 2, 88, 110),
+(89, 2, 89, 43),
+(90, 2, 90, 43);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `themes`
+--
+
+CREATE TABLE IF NOT EXISTS `themes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `JamID` int(11) NOT NULL,
+  `Theme` text COLLATE utf8_unicode_ci NOT NULL,
+  `TotalVotes` int(11) NOT NULL,
+  `CanVote` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `JamID_idx` (`JamID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+
+--
+-- Dumping data for table `themes`
+--
+
+INSERT INTO `themes` (`ID`, `JamID`, `Theme`, `TotalVotes`, `CanVote`) VALUES
+(1, 1, 'Candy', 0, 1),
+(2, 1, 'Consumerism', 0, 1),
+(3, 1, 'Death', 1, 1),
+(4, 1, 'Rain Drops', 3, 1),
+(5, 1, 'Connexions', 2, 1),
+(6, 1, 'It explains everything', 4, 1),
+(7, 1, 'Urgency', 2, 1),
+(8, 1, 'Exclusion', 1, 1),
+(9, 1, 'Fall (any meaning)', 4, 1),
+(12, 1, 'Indirect Control', 6, 1),
+(10, 1, 'Fugivitive', 2, 1),
+(11, 1, 'Space', 3, 1),
+(13, 1, 'Gravity', 4, 1),
+(14, 1, 'Artificial Life', 5, 1),
+(15, 1, 'Roguelike', 2, 1),
+(16, 1, 'Platformer', 4, 1),
+(17, 1, 'Hack N'' Slash', 0, 1),
+(18, 1, 'Exploration', 5, 1),
+(19, 1, 'Many Weapons', 6, 1),
+(20, 1, 'Colonize', 2, 1),
+(21, 1, 'Inverted', 3, 1),
+(22, 1, 'Spooky', 2, 1),
+(23, 1, 'Zeppelin', 2, 1),
+(24, 1, 'Volcano', 1, 1),
+(25, 1, 'Infinity', 2, 1),
+(26, 1, 'Loosing to win', 2, 1),
+(27, 1, 'Jewelry', 1, 1),
+(28, 1, '1998', 2, 1),
+(29, 1, 'CoffeeBeanSmuggling', 0, 1),
+(30, 1, 'Apocalypse', 4, 1),
+(31, 1, 'Inter-Galactical', 1, 1),
+(32, 1, 'Romance', 2, 1),
+(33, 1, 'Patterns', 2, 1),
+(34, 1, 'Black and White', 1, 1),
+(35, 1, 'Mobilitity', 1, 1),
+(36, 1, 'Firewall', 0, 1),
+(37, 1, 'Fairytale Universe', 0, 1),
+(38, 1, 'Magnetism', 5, 1),
+(39, 1, 'Beat''em up s-crolli', 0, 1),
+(40, 1, 'Strategy Game', 0, 1),
+(41, 1, 'Time Travel', 8, 1),
+(42, 1, 'Bruiser', 0, 1),
+(43, 1, 'Explosion', 2, 1),
+(44, 1, 'Rainbows', 1, 1),
+(45, 1, 'Block', 5, 1),
+(46, 1, 'War', 0, 1),
+(47, 2, 'Being Human', 0, 1),
+(48, 2, 'Empire', 2, 1),
+(49, 2, 'The Body', 0, 1),
+(50, 2, 'Paranormal', 0, 1),
+(51, 2, 'Expressionism', 0, 1),
+(52, 2, 'The Causal Loop', 2, 1),
+(53, 2, 'Clouds', 0, 1),
+(54, 2, 'Random', 3, 1),
+(55, 2, 'Fast', 2, 1),
+(56, 2, 'Transporter', 3, 1),
+(57, 2, 'Speedrun', 3, 1),
+(58, 2, 'Scheme', 3, 1),
+(59, 2, 'Deceit', 0, 1),
+(60, 2, 'Explosions', 3, 1),
+(61, 2, 'More Explosions', 0, 1),
+(62, 2, 'Multiplayer Coop', 2, 1),
+(63, 2, 'Physics', 2, 1),
+(64, 2, 'Peaceful', 1, 1),
+(65, 2, 'Water', 1, 1),
+(66, 2, 'Assassins', 3, 1),
+(67, 2, 'Infinite', 3, 1),
+(68, 2, 'Horror', 1, 1),
+(69, 2, 'Artificial Universe', 2, 1),
+(70, 2, 'Dungeon Crawl', 1, 1),
+(71, 2, 'Pet Sim', 1, 1),
+(72, 2, 'Psychedelic', 1, 1),
+(73, 2, 'Puzzle', 4, 1),
+(74, 2, 'Spill the Beans', 0, 1),
+(75, 2, 'Swing Low', 1, 1),
+(76, 2, 'Political Sabotage', 1, 1),
+(77, 2, 'A Dimensional Rift', 2, 1),
+(78, 2, 'Steampunk', 1, 1),
+(79, 2, 'Ocean Abyss', 2, 1),
+(80, 2, 'Food', 0, 1),
+(81, 2, 'Shoot''em up', 0, 1),
+(82, 2, 'Gameception', 3, 1),
+(83, 2, 'Electricity', 4, 1),
+(84, 2, 'Cards', 3, 1),
+(85, 2, 'God', 3, 1),
+(86, 2, 'Villains', 1, 1),
+(87, 2, 'Cold', 1, 1),
+(88, 2, 'Small', 3, 1),
+(89, 2, '1995', 0, 1),
+(90, 2, 'Health', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` text COLLATE utf8_unicode_ci NOT NULL,
+  `Password` text COLLATE utf8_unicode_ci NOT NULL,
+  `Salt` text COLLATE utf8_unicode_ci NOT NULL,
+  `LastIP` text COLLATE utf8_unicode_ci NOT NULL,
+  `IsBanned` tinyint(1) NOT NULL DEFAULT '0',
+  `IsAdmin` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=126 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `Username`, `Password`, `Salt`, `LastIP`, `IsBanned`, `IsAdmin`) VALUES
+(1, 'zsbzsb', '6247b3fb1fbe4dd9fc611048cd91fa1f3f9e32088f6931d2486b44f20834060f1c47e3c5922275685179f5afb142288023d6f16363412a13424fc0eb0dd22f03', '52df439dedca74.66978119', '69.35.195.48', 0, 1),
+(2, 'Therocode', 'd365901b5b495418ce42a99177e3c3ce0cb20d41b197f9510a9d48430554339d1613598bd91aa6298b7cc12008225bf789bd678e318d8f79330c563534b6741d', '52df65973f0859.57760819', '121.215.150.120', 0, 0),
+(3, 'kimspindel', '16796f6d498400876ff2ff2a4af6d6bb8822b141e1070ea106f56128cda5bd00514bd50847b5f41ca0e96f5f8cbaaf1f2980b1dd0d71ca7d745971b3b9189a64', '52e12a492cf786.52728244', '121.215.150.120', 0, 0),
+(4, '''', '9bfad9f5c4e6d0330df56d929c56cb6b2027b86512888bc08fce25b2f5d4b9ff8622dce067bd0dd089e8535626634902018e20239ded052a77942534c1103ef5', '52e19f91cb3635.32607930', '87.162.87.249', 0, 0),
+(5, 'hax', 'fec982ee19120c57a4de4d4245d50146df15580710f4fe3ee04e151996b61fa01cf18c98a701d6ff22d0a0b1263bf77ce15fb3997220fdd66c77cdecb1760c45', '52eb3cc4307d02.73096149', '85.225.84.63', 0, 0),
+(6, 'Nexus', 'ed2c9f850cce27766d342465c3782f32ef808844192af6f860db65dfb264455d0e0a6d0f53b46ef3e0ab8f77067bbe53023c44566939ca2bb4c92f46a6a40cb9', '52df9a9e05d557.24038527', '178.198.156.134', 0, 0),
+(27, 'downtimes', '08cda2b42a67503b40b49b8d6130a3f1803449e709bc6be3c4e00ceb51c0bf2c3c9a7ab34d6e5cda399934a5be919d1c8e78619fda0fcdfd91823844a76d725c', '52e6484dec8b78.07482913', '141.70.81.136', 0, 0),
+(28, 'lolz123', '390a8c5ae471494e896c6b584014251b22252d6323f46e4f4ceceb9ca079533545562c42cec3beab3c3e80fcd8bc223203b34484ca82e56379840fdf26820ab6', '', '', 0, 0),
+(29, 'SurgeMedic', '44764b1e448b919fe43819b0b8590a1714b2e28bc88c809f4c9be7dbb189e901ae511c2e5ecf18c52e18a7a6a607018c3a5e66f4d4fa906ff72de0134a84256e', '52e5edc7d1f913.22207826', '142.166.197.218', 0, 0),
+(30, 'Grimshaw', 'abff798c081493dca76cd554c1fca316f92e3296c9f35cf105fbedb2deac8fa355eb4267d1d46b13b6bf94013e544be17cc2ef53a6d81e09292980c866a72e6f', '', '', 0, 0),
+(14, 'thomas9459', '4ad86f71203e5488127252c544d2efa95a0f8199390c416cba048f9de61004139dc80bec6570c7d90604390f166125888218635f5c65df77d245cf95e4d3f2f2', '52e5c19b075b05.95018764', '174.54.33.153', 0, 0),
+(62, 'dixondean25', '86438333b93d2324a32334470154cda11b3155b312911215699a3225941bf3792647afead613050662c77d8c8d8e5385d490bed5bbe7955ec731a547b5939882', '52e73b88847f96.68739740', '108.65.212.18', 0, 0),
+(16, 'iostream', '26a4be004fcf89eb8d5f6a27dc4fa22256837e7a6ea4c30f0c5e0738f08a0703a26ea3a8a4aab8b58df5c125d161019fca235c2e2ba0fcc7626025e52c1dbaa2', '', '', 0, 0),
+(61, 'khlaw', 'f09ae66b7b01395294c53081e392f078805afcc24c161d942b455b12fb02df9d1ae0d8f11c27c8aca308baf4c86f6faef896435db2abb98384a179d6feb24e6f', '52e6b74c81f7d8.03814797', '90.60.132.88', 0, 0),
+(20, 'eXpl0it3r', '3e0bb7eca2d6df1e22440b9a5b69433ee5c86d12290e14435526081d1604a76e50b2d4cf41767ef65565ee180420fa43cdedbe68678284f53a9b36d42f7e13e3', '52dfc952c5c997.46297699', '213.160.42.202', 0, 0),
+(21, 'Aster', '2c02cbd6f159084f07a9885e13950166f9da2d986797bee125d8d9d78e879e6f493567ae94f5809fc8b3c1f832360f9c69ee9bd97167d43ca6fd81c3f1a83f66', '52e42c029427e9.62562024', '89.80.255.53', 0, 0),
+(22, 'Lo-X', 'c7552376353b9c43e9f3d008a15b8e92c54436a3d55a115e321295b1fc37106cf0835ee36ba5c256f50ae7946cd1b08aa7efacdacfdcf372abba5ef293aae5a9', '52e0c77c5a0d36.00562302', '2.3.23.123', 0, 0),
+(23, 'G.', 'e15ae3719a044de2f3c4d98c5ad7bfeb3ca43b5be31dddd90de1a9cf1f54f4055fcd1d9e569f3d8775dbf6d18fbfd1c01a1769fcc15d0730af4f9f596f08af9f', '52e61e07686559.27168291', '82.239.78.12', 0, 0),
+(24, 'pinko64', '67fa89d43a2810362b955253e8c051d82899c8ff7e42fecaf2cd8a4e62a1217c512baddd793dacb6fd36c121cf0ad8ad4fe0674b4d52402793dd5a33ea2b05de', '52e1a912e39586.36903423', '82.181.57.210', 0, 0),
+(25, 'Mercy404', '5f23c270ec404374d7cb5401d0f18c8991232f4872494596d296d631390fd4384ba2a71c50deb276df2569e6facae9cc147e4ad46a6f370ff623b23cedd590c2', '52dfe807cbd4f2.59337706', '24.210.27.157', 0, 0),
+(26, 'Jebbs', 'e02d0324be9a8c76a8f377de60e6462b5f9e392aa73e63cc5fde2597c8177cd545f4c9de63858200d81a88ffc6ebd8aa3ec6b5d0b7233ddefaab4131f4541904', '52df4544c239d8.30826679', '24.19.232.172', 0, 1),
+(31, 'Zephilinox', '000c041f965d33929e1be3e3a36f8b55cd2d4d2fc8b67b13a1422437f00afd0355a4db29876cd2fb48f5cf0e9493fda5844a87baa14da416c92ec87e6ea613a9', '52df736dbf0b09.85509153', '', 0, 0),
+(32, 'blojayble', '5d4bea48dc5b9a834f15cb9727cc3c6183c6063afef2aff780191b771c00a5a3af0df86345464d6b4967a4168a31f47a591c9754749f8dc8d0453b1c50b8a35b', '52dffc825ce1c8.50715791', '31.42.12.117', 0, 0),
+(33, 'grimmreefer', 'e22a4678b2394112d116af285d6b389145d0da76d242a7c9cbf24ae5bcc2e0e19f0c02ae0397e29cb30ade5c5c609bf81c2a75477b823f7a84c8ea29f8445c91', '52dffef723aa75.07073457', '178.191.148.9', 0, 0),
+(34, '1man2kinds', '8035a770bd57de9eaa696cdcb2bad49ebde11fe712f78464ec4194b3b12a6e6d25775acad484dfad0867ceeb1a09971411f73a0b744b791832a71bec69689b61', '52e00da01d85f9.38947320', '206.248.170.19', 0, 0),
+(35, 'jhpy1024', '4ea32f0b5e672f991d69e0abdbd8b58312d5e8efb857a5b90081995f293787b295390825aff205fb9c59685474f9540c224c8274fc3963a91b64afc16f7c6e1b', '52e0153bc4b784.11389555', '', 0, 0),
+(36, 'disastro', 'ef74507134291b7bcf6ac5ed8d0b13670b19af9dac819d6578d0f954ad23b3d1a4148729446330f2aa90b701640daf172a7b1e11f16d3db6f8c5c07e477e4555', '52e026dc049538.19615296', '', 0, 0),
+(37, 'AlexAUT', 'd1cd9499b25e1f4daeb9803e6663e94dea3693c9a9af9cae8de05dbd633d5ec00dfe8ad731a516bde2e0a2b340346d2982fd6d361fbc0d34dfdb12cb7a356f8e', '5387a770029286.06593202', '93.82.21.62', 0, 0),
+(38, 'Ignoritus', '6858ecec060543e9a64f64331b9642ef97ed60d6041802c9e0fdb4420d5dc4d3570c700a408382bb7eec886a1ee6d387c65c9e92996ca4b083768ed59bdcc971', '52e094b15f3176.69448383', '', 0, 0),
+(39, 'cepro', '57f76c0b3f64b8fb0dab7d5dce63ecf38c37fc57c5a5f7dbcb4ef6f17c9fab11ceb4dbaba63611912738cd4635e423d0f302db316c1da015575d9b446f0b9077', '52e0999c6b69e0.37758209', '82.67.66.134', 0, 0),
+(40, 'JonnyP', '67aa0ac0ce7703ba15e030adba627f1afa5a6935445b6f0d8152632675ec438b807cd6b14002328cf6b4d187d770f37a889eb721c77b1baaa16682a4e6d46177', '52e0e1e2a0ed21.35705565', '', 0, 0),
+(41, 'Mooneye', '81bd57e500d9975b69087d90d5c0131984bb2dfd11f56a976b8519e4bf712166200f75a98d8cc0c7a3e2abe72dcb3f2d228bf216195ca95d75b390c5c94ec546', '52e103ec508cd0.94006599', '67.247.235.240', 0, 0),
+(42, 'vip-ak47', 'f4960da4740619c7fdb23afacca6a238f4b41e2f9abf3b73e3d6aa3b2f31e547476b5be2955289f582f1171edd21482d367ee22c133f41f80d0ce29b815aae3f', '52e12c1b2b19f4.59226101', '217.118.78.110', 0, 0),
+(43, 'veltas', '76c6484639f27c717dcece929839b47eef16984ee63290f7ec7458325c43e7ba245f0bfa3486808f4ae46800e8ba508008ce4033972ac0464bcbfd4ec1481d13', '53875a7d806977.74932500', '2.125.50.158', 0, 0),
+(44, 'e-e', '3052f94e49d1aaef8902d7ffe497e2339e3f90fe98efea803f449050b8aa66466c70a80b512f9e780fec9a6cbdd9cd05e4e6854783ab6ba4fa85fa3b494a0f4c', '52e153f4b6d328.67446373', '', 0, 0),
+(45, 'lockandstrike', 'f8332c8ee4db434b603e32aac2b3bbed09642940bc45a21bd9e67d2a2e3c5d07f762ebcd99f4f85bf918bb865c321dfcd94080ba0441020d8e681f9156b64ec5', '52e1a2bfa84906.99414431', '', 0, 0),
+(46, 'Purpwood', 'bd6253db9aafbcddbfeeae550e28c8e8d00a07d4c068ff038c53167f2bad19d0a3ca21c27e407ed2c8e293eb7ee2c150e9bad1623b70b0e1f1a614eea34d4ccc', '52e1a31b171743.43949015', '', 0, 0),
+(47, 'alexmatto', 'dcaaaeb641a95ae0e73c8d1d73e845a88bca94c7db6f0d4749cba94ece6b9fb31817af6c447e8a29181894fdd8087e73568e779d2bebf4f39d65eaf5fdb9f649', '52e348cb4e3875.10367638', '', 0, 0),
+(48, 'cipht', 'd1b0e7da5a5a2b433ec814f5cab64d9c1891df8915692d14a7335c19fee1921f03528119a1fa65c65ef4202be4de69a05729d1d481a32100c368cb7cbff9a2aa', '52e3510c5cd150.89936339', '', 0, 0),
+(49, 'AlexxanderX', '6c3066eed5be028f0718f5ddf9cfa12ac1bb383ed57b8ae2bbfb47eccc25d33dfcc0736d0c1160bdb2cc8d8306b79effb4c7fd6a29c8d2d48ff5b28be2cdb697', '52e355b91c59b7.86733503', '79.114.171.132', 0, 0),
+(50, 'luke5542', '75193b7a6593890b65fc6aebde999f4c224842036834ae879b02b9f56d3141ee80d183d86a7154e25db712a3431cbd9532ad535b814df0fee15cae42086fc053', '52e3b2c586cf32.12852961', '130.88.168.58', 0, 0),
+(51, 'bheads', 'b2a3d05f742191e189ce11f1585574c96065ef5a5f706f9658671e1ad44ec232417b1d61058dc6f69d2acbb27a73fba9bbe5555038b7038adf382e3e8ee859ed', '52e3c183c6dd71.16978744', '', 0, 0),
+(52, 'DxE', 'c4caf0ab3cc62c3bf4fe3e3d4298f61f52d8bb30ad892244566b8da9cd128f29a92137f7b6cc50340857695160d23db2a53646b0619dffc439c4a6a10be3809d', '52e3c889222ef0.14476513', '213.106.181.49', 0, 0),
+(53, 'Tank', 'f54feb678fb3b8a9c93e90c48d5fe564729abc0767ffbc8f8b8ce3454905cfdf4173ef5727d78e4b7a1c20c6beb00e97ac8009ae0303ac57979bb14f53a285cc', '52e426a798be60.78626261', '37.24.157.43', 0, 0),
+(54, 'piticroissant', '0c6265590d0b7897347020459155003eaf1d1635be377432a8f98b6a5fe470356a888b70d4017a821d6e12d1e12b8eb5f05939ef7fb63bf887edcb0466eb26b0', '52e4d9d9838762.34003273', '90.12.137.41', 0, 0),
+(55, 'Freakazo', '4567b1a4ad01de35581894b824d575c90df18156a341f0c2f0527e011db60d73fc51e1fe9ffcb2db01c309f0545cef661598e642469f59c36f5d511f2e1fa6db', '52e4e88034f242.20995711', '121.44.17.122', 0, 0),
+(56, 'cplbator', '33d56c9a425d29346e2257de735bdd1de684e0505d0bf7bcabeaff58b31a544002ed5959965ef4e03f197284077f9a681d156f196a157d9426489f5e97f64023', '52e51e1b475c86.65404966', '176.180.7.209', 0, 0),
+(57, 'FRex', '2ab025e0a75963ed614d7e283d47b1ce04245b88e7ca683625c0de65a0f7f47ad307820f121174bad98f7ede81ee0126b8b03879e5f2e9c7fecfee41c69b4aea', '52e5ae9c35a107.35062651', '89.238.35.211', 0, 0),
+(60, 'MorleyDev', '82116cc84ed875b5178cdfd25396d5d5589aa8821f9e505e92fffe75f923e15ccf3d195e5504a37fc9656ddb7bb554b0a5c4a87bf8f500f366808beb2eb96393', '52e62e4435c4b6.71272819', '82.2.71.196', 0, 0),
+(59, 'GiinArtor', '71ddaf0cb6812dabbd21d14f9e5c1b5068f8b14d6ac7dfe145040161f0c12f85619eb5f2bfff5af62892fb56cfae984db459b0ffee3984f585e46fe99b404d56', '52e5cd576355b3.65539884', '75.176.107.137', 0, 0),
+(63, 'binary1248', 'd3d1abb0a1fb9ebb92e15d2d5c014f1ba1992a95d49a130c8d25fd0f4839ea4513a3df06802f7795a58dc205a67d1d793b92fba5840742c7bca00738a0db51ab', '52e7cb01bf9d42.23860329', '94.220.201.73', 0, 0),
+(64, 'Vardinator', 'b8ba3bf9285832ba913db3b4563477cca95fffbbe4bf7516670a1ef86803fa78de8ab51f72848910b47c8a6747d3fef4649769f0ff5c100f1d84f62776f59842', '52e811e6de5be1.58689827', '184.171.196.31', 0, 0),
+(65, 'lolz123_2', '8a665902ec8d38e1dd77288823ea2ab5a4a62ae935447d35cb8b4aceaab77f8f364219c65a52c4cd7a3987a5e68249007c8c6af90a9abb4288888d2112b59d98', '52e820900850b1.39274402', '66.229.41.69', 0, 0),
+(66, 'Gobbles', '982cd6eb795ed3a7cca70d437c694903906bee817e4eb1c35f204e40837935ff5d30c536d824093ba522f3fbab99a54e06ce91a70122fbfe07e103a3b57c90e3', '52e84df224b6f1.60690240', '142.166.174.114', 0, 0),
+(67, 'kiwon0905', 'c7124b25bba1488c171befa545564260a3b9fa3083eb366d3cbdcbe38dd55caa0de83d20e6c0c4660ac66a9fd2d1eba7879622b45af86116b5296e7cd3b1bd87', '52e8729a94ea76.37509257', '98.169.56.158', 0, 0),
+(68, 'Spans', '33b898a157ebc67265197c4d2e5fb7a9b835c6195fb1e2764c364b464276fac14724a321c02a2de69000c36190d2e39bd259361269c7e172279e912312504b6b', '52ea3fcd2729b6.30860172', '88.115.146.19', 0, 0),
+(69, 'brenton311', 'b08fac7a8b0fc345f8e6d3d1bbe60bf438a1658e62984e74db98fd2ab6b21dc8080f22ec4c2ec8c8c7407679ef0f7ece1d7a8d4daf63d458079a928e459accbc', '52eaaeb02a9845.68885770', '142.166.90.199', 0, 0),
+(70, 'frazzzled', 'e31efa72ea238670253965015c8742291501423d66bcb1bb838cac4b58bda01c17acc8a1ebb0086b473f79ac02d6d112135e6da4dd8e860ffc6524f9c7e9bd6e', '52eb0a7c514ea7.03865379', '31.205.12.29', 0, 0),
+(71, 'testuser', '1fae51665752545fccd52afd6b8d1dd824c05e0ebfe3554c2e77f1383a0a7593426b7399de359d21219eee21352508e42e14aca24b9627a70639997b3bfdd8cc', '52eb1de2e01397.62925124', '24.18.29.9', 0, 0),
+(73, 'Raincode', '7e7454ce1e728fb3fa42f10fe974265325ebe381db1fc45a53fddbf3a06ed4b2b66d9833a4218c442b2202343957b5d09f32ab900545dbe72715789041ab7023', '52ebad8c1f7b16.45262852', '87.162.252.88', 0, 0),
+(74, 'Iteem', 'e95728549aeeede6762252c3aeee041b794337a5b33afeb09daabdb47ec60bc47877516a455508b1a7eda4eb8a9bdb8b5e1850010bac8acd1a8db80aa4645170', '52ebbab57f8255.19949824', '87.102.214.185', 0, 0),
+(75, 'bob', '0d581a52952257f68ff453176a833d9225782196a9992fce90bc4570c4f13a015114cb78910242c082181b305298e20bf0ca3f4262b395f589cf1114e8fd9efb', '52ebbbe7e7c4b8.35604069', '176.180.7.209', 0, 0),
+(76, 'cloudncali', '27deda2c50ffa3c70c33f85440bc41581befc6e7df91ddbb5e0bc97ac14be5fc6ffd9d361337487be8e1c6b6e005a3b3c76c77cf0dce3d2097880fdd3079839c', '52ec88db3955e7.65246130', '75.82.230.207', 0, 0),
+(77, 'spacechase0', '0660a64b0ce0044c49e04862f3af47ff9e0636a3723e687c986b0b8bf1fc220e2826cc744431ad5b89cd0191570be190060a83c7e07844b93109ba479939ccd1', '52ed0e70272a28.62075483', '69.246.175.197', 0, 0),
+(78, 'aeroslizer', 'f6375130012940b4432486405f8b598b6ccaaff85a60fcb5eacac5375846387b712930a93e2fc42f8782d93261d9e129617f27f02b46e3a09b5082fe3ad852ae', '52f66eccb2c0e4.52802882', '24.6.109.213', 0, 0),
+(79, 'deathbeam', 'b3ddf12b15634adf81b1398c98bb6566d20bf38b176d5608e863238585fbc7777fe1b7e6e5b246cc1bcb9f55c1a9ae8e047792ed73b40b1ea6bbb857a23ede46', '53147b395a5282.35525377', '193.87.172.13', 0, 0),
+(80, 'ghostmemory', 'f8ebd3b81d427278e60fb398ffd7a1eab03357f9885586943d9e8e5314d3a349a52b8c810bec970d777b4d416fcbf9ceb8dc44d792bf12d398b0d7e2ea26f364', '5314911d2b7f74.97168340', '62.254.119.26', 0, 0),
+(81, 'dabbertorres', 'dda59ae30e4baf8a723e6a1331b4ebe05847c04d2145003d00c7a7163a241846be9e52338f5bec53627f7c8240c8098570bb61ec385633ba6392223ad6efb719', '531582f2a45449.89875495', '70.162.146.129', 0, 0),
+(82, 'cptZouglou', 'cd3029cd6af3a99f140a26809d0d9d3ddcec96e1c6065b85b29b80596ab6f9708e4d4e39fcb1ffc8982575fa1cd50a534bea5668fa0c7d961e135bfcb5669bf9', '53175459be0c95.26148233', '195.132.181.123', 0, 0),
+(83, 'FlowX', '7cd9cee9d7690fd9b06bee40fe76a853d9be8c065738004bdde755b8ef30e963b16600cb73c1faf215f51df3a4648b49f47600f1309c1f3ccda5972a9804099f', '53186915297248.57028104', '80.146.188.51', 0, 0),
+(84, 'criptych', 'ab4d8b7804ecab7c9f3e081c308a448b6c376b262a9c7b9b7c06d6da848fa32320a60c2c8c1ca2c7afb2031229c35be6b5c95c164a04aafb2f3e3bd89410b1f1', '531a0c2fa04261.36823061', '208.90.217.196', 0, 0),
+(85, 'vsrz', 'e050ada585cc3e26fd7a51e51efb1aa444db865cd05b13d27f97e0c2b12916c1bd57a782083ef99c794cac0513d3bdb5cbe8b064e97593f3ed5c9fe1ea31db29', '531f56d73e4422.39330752', '144.37.205.10', 0, 0),
+(86, 'nomutilisateur', 'b689c3371b668e1e949ca9c77de43ad4451ada7e6928136b7b255f825042f8b6ad2f5cdcf2dc4d56e35f1ce081aedf898c6e7fee87d74688c159411a43e65e70', '531f8d102b56a6.36828924', '197.153.66.12', 0, 0),
+(87, 'uChar', '34eb2131bc08fa28fe96016f1ad116c773031f740656ed0ba727f15ca52ef2d3349fb4c7dc9f34a02109e24f656736a075b54704a2ec9280b5231d6d69620a9b', '5322d069248f88.65068100', '217.130.151.219', 0, 0),
+(88, 'Tounet01', '60fd93f183859d665e0920448216c33563ebba79a6118aa600273e212c5395e55c22a0c0abd77163160dfef803cd7852a16222ea2559533c500520fbf14ad493', '5324bb0a1b8ec6.79084643', '109.88.237.197', 0, 0),
+(89, 'Kernel Panik', '8e4ea5f1679b97c602fd01c99248b723a40a558c080c4005add2b32d1c0e400263a978a2fe6a361e86c8d4938d0d7d1c45e60bc3540e5155d8c91ddecf585c48', '5325e9f9392ba7.83053757', '92.137.242.190', 0, 0),
+(90, 'og_the_trog', '4985cff4ac71dd41fef4d90042d2de7e402cf847a6ca329967039e6da86907db4cc0a70e38157fab0906dee2adb1e5f39eddc70ba7322434d04f16dcf2ce1495', '5327b260a12086.81037635', '147.41.128.8', 0, 0),
+(91, 'BrumDog', 'b8c3d829543bf2380ce902994203a996f62ba33370718012a314c4799f35b1dfb4d4e11752e037b073de8123e914ebb9f3e794decdcfb774858160d9aa182d0f', '532f064ce49304.78784842', '174.50.20.100', 0, 0),
+(92, 'Vicarious', 'af52c87c1ce96d6e6b1e538020c6d9408ed5b0d61654b607028093de2a317dfe7e9c3565ef309c950135d82e6b3c45c2dbddb7186dee80c419197ee077b193e2', '53317cd2747fb9.67893496', '95.147.29.201', 0, 0),
+(93, 'Excellent', 'fe1c02a08e11fd12c670d4362fb0a665682c471ac21c65843f47d15bf25386407fded108cbb460ba606238e29270a5e1875877aa58513940b83d6916af3f0389', '5339892f09ab43.88031963', '204.39.58.111', 0, 0),
+(94, 'BarrensZeppelin', '8b7f1483d4827ac1c8de3116f5d0df7e18154cc543ccc64c456bb013e55c166ada9894f29a03ad02fcf16f9ad74777c87165912054d54fd4effdb9a47eccb392', '533aebf0dd30f5.56970041', '5.103.243.58', 0, 0),
+(95, 'Dritz23', '2afa4499f28dfc19c0f0b4a768643db28458a9f83e0e0d42aa0f3beee629ccd4ec72b332f987b5dd47ab5ebdc4fe22bd50e3822d79d79c5e57cfe5c7aeb8affd', '5370429b623253.84597584', '142.167.77.18', 0, 0),
+(96, 'doodlemeat', 'a04ca839df55861eea48cb9bf3dd592e98ba08ded4bbde8903bc4d6d6d45319298350a52246ecc0132ffd5b23026a9c2a282d7b29bb1798d1828cae8d93ac2bf', '53725c87668091.42344643', '81.224.228.154', 0, 0),
+(97, 'quebecois', '8f8d8e7c0745e4ef48cbb606f93822542082d8771e3f5003ffca6bd29658631d4a9666767a549fca316afbf0a37bdee6b607e01812c1244b8a76ba0914a67090', '5374c7c7933ae0.34265104', '162.212.10.117', 0, 0),
+(98, 'nvangogh', '1099ac2464bd42b7d40a1fdae6ad94c83062e6862dccf17df22b632a04f003af14d3fa160974f418063d3030f1e40bf909415f4804d5d71401fcf17df35d620e', '53751b16de2983.01611265', '94.173.248.162', 0, 0),
+(109, 'Demon-In-The-Jar', 'b6d719df4ed6e05923cd38803faed0200ff06f169c152a06f449daa0c4a08f00120dab86181fe73491529f4acf1637a882f216a5c0ee94d89d617e6812329f2e', '5386d3c0ceebf1.12942343', '5.54.38.190', 0, 0),
+(99, 'muddmaker', 'bd25ff8bf4d854c2184d4870505fcc5c7688a5aca3a15443e55a03ad7c4e3c25cf0c0665c6b55c818f746c5f50da14b35e29df56be83948d7646c7eba00b5853', '537e8b5c071697.34317573', '71.227.232.53', 0, 0),
+(100, 'Develog', '6213d74330c026f2e645daaf328254f784d8337027ff2435062b302653467f8675d031dffa8d2e393d49b859b0ab37ca9c5a457ea6a6ca4bbd93c8b72bf568bc', '5380785a857489.79987181', '109.31.65.162', 0, 0),
+(101, 'autumnchestnut', '8cee3ed9245e92a35ac217659615626c6971702b01bc1d38978cbc644e4aba97a5e0e58636463422e83a125c66f73703636e2ae0d5a6454097fc8b4e796a1454', '538579a3426e56.56924428', '70.181.176.105', 0, 0),
+(102, 'Stereogram', 'c6fbaff2e737a13c53c88a9d6bb8ab2f1b04196e7518cb93d746f47b370cf6dcbb9a88fb81a3418f1880792049a5a8323530902d16194789c8ea044d6c63f9af', '538590895be654.80353707', '209.91.107.168', 0, 0),
+(103, 'drikoda', 'c58e81d5a833760486c1ed9e73f949e6163679c447bf8bd1a50c0157122ea43e6268a7907dde3ea8f08872ea01b2dc03dcfa4210062f810c6a2a26f7f4fa038b', '538598617931d4.18237166', '115.146.206.86', 0, 0),
+(104, 'DarkPhantom', 'dd19b15b3bacb719265b774fd855378fca191049fd09095b8cd6e5fca6dca20b3da376e92931446ceaaf9fe63ea5f55c34c978263638f6979f9545fddcf399f5', '5385f25e8bcd35.49137675', '190.103.202.24', 0, 0),
+(105, 'CireNeikual', '70a9f5155b980ba3fbfaaf3b9ea79bc3e6a8b37be15613ecd0f191ff7b5e099c973e56ed1190320990435a8e63b6d85f3e757838f62005afd5b9def1f65f1e6b', '53862635738235.53360101', '66.229.41.69', 0, 0),
+(106, 'Dante12129', '0cf5fb7dfd8740695109ac2caf796ed72cfa843a9528bc1f8d29bd773abb335a3c8a332382e6dd9fa1bcf4c533e4022d068408b1797e1940c593abf88ff8c39a', '53863f4b203ed9.99904268', '68.13.218.84', 0, 0),
+(107, 'Geheim', '4cc67c4c4a82dac75a15e57c8afe59fe6f7c884018d373cfc7cc67b9e30e1deb49ddb5b9f61dca5ca2f985eb536aa9c0595927de36566bea36914a48555e83e1', '53865ea0d2be47.47883676', '77.119.130.108', 0, 0),
+(108, 'jbos1190', 'b125b2c5205af2dbc9a94192e89b9d08792cbd242c8710feae480280c1b8b0f477f9369378edc341e0032f6d39d7d74a81c972c463f4cdbb57fdc96682660f25', '5386854161e3c3.09287834', '98.118.119.136', 0, 0),
+(110, 'texus', '7f27e4d9adce9d00103e68433fe072a9c904b4baebf7172007b90c539f4c42158c8bfdfb9cbaca96c73325759879ee15b881aa523c515c1236eb2bda701a3dcf', '538737f3620993.58605872', '84.198.98.89', 0, 0),
+(111, 'TheIllusionistMirage', '3eda5c49c033df15a33d707897ad8f9d987be8dd36a11ad6240704a2a94cf881e83ccc5138fadc202c1974e8ded2a754e4500c26ed93c3a2161e05cc4a8f4099', '53873957e9cdd7.73913469', '117.203.252.127', 0, 0),
+(112, 'A-', '97ed1cf57f442cd2cf77f0f347e0c6988b4fd0892abe1fd742f294982ebc91d94513c4ee4ae36a99302d1a875feb753eb4bd73598ccadd6d1ce0379746451a16', '538764e88d6379.40055524', '82.239.78.12', 0, 0),
+(113, 'blurryroots', '448aa01969f706890ec10f136b7c62f1b8a8e66e622d4991d736e8e5557e95cd36a3e12de0e85974dc6329b322f71e4377ed472b661da3a40b2c03c6bea05294', '5387796c6a8ca7.36372329', '78.54.162.145', 0, 0),
+(114, 'Rosme', 'eaee0cac2317ce3b7b9333ff7a84c239706f8385726461fe4ce57341d5407142dfda03fb72919076d69e9a672dcdf38a1ac8db310786542d65a34d7d58b917bf', '53879b556fc9b1.03360676', '142.137.230.0', 0, 0),
+(115, 'arbitergoten', '90fb75fad3728d6cd8739fe0d1081087cf96211473f3ae6836b9dcef26e70fe3c59ca0fb5f10819f301395b302f923a70c8c5d9c7f4ad6af8c57d9f96ccac276', '5387a0d7ecaaf5.42169875', '173.183.235.8', 0, 0),
+(117, 'kaitokidi', '227123e38f40cc9952e516ca92081faa445311d7ebefdd8db436486514edcd16191495f5ae54248e916e5d022f04ef8fcd5203700168ec243fe696fdb886c68e', '538cba2ec95673.96114402', '62.57.50.238', 0, 0),
+(116, 'Clockwork', '73d9595c3f4e3015b785a344c42223dc322a10db1da741e363bbe3415787cdfd0b130daea4829973f7c4609a27063b395a52ab98213327c6e0c1dc725e06049f', '5387b2b97ad6d8.95728139', '68.228.238.160', 0, 0),
+(118, 'FallenWyvern', '5b63067b9bee389868b041acaa28fd8d216c5a277ef0b327c36ca0530e5d631dc2b4c83cb93a949614d03cb941691b0491015b659d1075c1ebce61ae11d3c11b', '538dc922996065.33726750', '72.38.188.26', 0, 0),
+(119, 'Cpl.Bator', '112ff2eb806e7e507aa458463be2a69026cea2423c5a0ec5e50e66ba8a342708d679becdd9485c232febedc05ad2f14e5ea5f94975678bc421cca3df2179cc31', '53a5e572d05a37.01671604', '176.180.7.209', 0, 0),
+(120, '0dayv', '06a6c81df8075e9c6a0aa63693c429363a8009aab1f52eccd03379f5fe2cd9a4d17c5cc55eb3ef91e77e0ed56ac63f11b7d725968c75161666ae97ffd6d0cf20', '53b43b0b834b46.22414459', '92.150.248.189', 0, 0),
+(121, 'Naarakah', '541184c66db65adf30bfa87c0a4c8265ac12f1871f0a56aeb8a0105a77da0506e64614a39eeb257b71d1daf1b9c3296179f04e48d4da7729b4a43aefd89cedee', '53c857c9cad466.42184443', '90.59.169.112', 0, 0),
+(122, 'Ariake', 'c83ebef9ff603b2b15049deedf3d8f0e1f520e3ff683031bf3d4c9431da707e44a60d409cfbb17ab5246aa3c7fce38533ef81784316e24f55af25ee1b53d7894', '53cfd8d410eab9.92824964', '86.218.73.54', 0, 0),
+(123, 'CrazyMerlyn', '1b140c6decd4774b26e3e732b8754734164559917fd2d741badf52c50af7e22377166c3a345b31547333a5e497456b007d511afea9c4d49655a825e5a6e9cc96', '53fc3f56694393.98234024', '117.239.94.111', 0, 0),
+(124, 'Loreilei', 'e8bf8a2865cb86c3c224cfed4d03f399c27fe416f4b3c4fdaf10e8e159622f52a12f28208a633aa1b856c8adbd8c764db44ed632ca3095a8d62dce3b7287b5d3', '5400eabc408836.89621327', '176.180.223.242', 0, 0),
+(125, 'bigconvience', '6b30c0148988724ff52eee0cf3b7850f58eb709f4e323105fe4839af6b25fba7ed505cd8233036bac4a27e93559fb90e4328622c002f818fcafe345112a6db53', '54169f430e4244.96162646', '116.193.48.163', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE IF NOT EXISTS `votes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `JamID` int(11) NOT NULL,
+  `ThemeID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  KEY `VTFKJamID_idx` (`JamID`),
+  KEY `VTFKThemeID_idx` (`ThemeID`),
+  KEY `VTFKUserID_idx` (`UserID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=178 ;
+
+--
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`ID`, `JamID`, `ThemeID`, `UserID`) VALUES
+(1, 1, 6, 0),
+(2, 1, 18, 0),
+(3, 1, 16, 0),
+(4, 1, 41, 0),
+(32, 1, 5, 41),
+(31, 1, 19, 41),
+(30, 1, 32, 41),
+(29, 1, 6, 41),
+(9, 1, 19, 57),
+(10, 1, 6, 57),
+(11, 1, 26, 57),
+(12, 1, 41, 57),
+(13, 1, 34, 14),
+(14, 1, 4, 14),
+(15, 1, 8, 14),
+(16, 1, 14, 14),
+(17, 1, 13, 26),
+(18, 1, 3, 26),
+(19, 1, 20, 26),
+(20, 1, 7, 26),
+(21, 1, 18, 59),
+(22, 1, 12, 25),
+(23, 1, 20, 25),
+(24, 1, 14, 25),
+(25, 1, 26, 37),
+(26, 1, 18, 37),
+(27, 1, 12, 37),
+(28, 1, 41, 37),
+(33, 1, 9, 2),
+(34, 1, 30, 2),
+(35, 1, 5, 2),
+(36, 1, 24, 2),
+(37, 1, 16, 29),
+(38, 1, 13, 29),
+(39, 1, 41, 22),
+(40, 1, 45, 22),
+(41, 1, 21, 22),
+(42, 1, 33, 22),
+(43, 1, 10, 23),
+(44, 1, 41, 23),
+(45, 1, 7, 23),
+(46, 1, 25, 23),
+(47, 1, 28, 20),
+(48, 1, 4, 20),
+(49, 1, 23, 20),
+(50, 1, 6, 20),
+(51, 1, 45, 60),
+(52, 1, 33, 27),
+(53, 1, 45, 27),
+(54, 1, 41, 27),
+(55, 1, 35, 27),
+(56, 1, 4, 1),
+(57, 1, 38, 1),
+(58, 1, 21, 1),
+(59, 1, 43, 1),
+(60, 1, 12, 34),
+(61, 1, 32, 53),
+(62, 1, 38, 43),
+(63, 1, 13, 62),
+(64, 1, 13, 42),
+(65, 1, 19, 42),
+(66, 1, 9, 42),
+(67, 1, 16, 42),
+(68, 1, 11, 63),
+(69, 1, 38, 32),
+(70, 1, 11, 32),
+(71, 1, 14, 65),
+(72, 1, 15, 65),
+(73, 1, 12, 65),
+(74, 1, 22, 65),
+(75, 1, 18, 6),
+(76, 1, 14, 66),
+(77, 1, 30, 66),
+(78, 1, 19, 66),
+(79, 1, 9, 66),
+(80, 1, 21, 67),
+(81, 1, 9, 67),
+(82, 1, 45, 56),
+(83, 1, 27, 56),
+(84, 1, 19, 64),
+(85, 1, 45, 43),
+(86, 1, 16, 43),
+(87, 1, 18, 43),
+(88, 1, 19, 54),
+(89, 1, 43, 54),
+(90, 1, 14, 54),
+(91, 1, 30, 54),
+(92, 1, 44, 52),
+(93, 1, 31, 69),
+(94, 1, 25, 69),
+(95, 1, 23, 6),
+(96, 1, 10, 6),
+(97, 1, 38, 24),
+(98, 1, 15, 39),
+(99, 1, 12, 71),
+(100, 1, 38, 5),
+(101, 1, 30, 6),
+(111, 2, 70, 26),
+(110, 2, 57, 26),
+(109, 2, 48, 26),
+(108, 2, 73, 49),
+(106, 1, 11, 69),
+(107, 1, 41, 69),
+(112, 2, 87, 14),
+(113, 2, 88, 14),
+(114, 2, 69, 14),
+(115, 2, 83, 100),
+(116, 2, 58, 14),
+(117, 2, 85, 100),
+(118, 2, 90, 100),
+(119, 2, 56, 100),
+(120, 2, 60, 3),
+(121, 2, 52, 6),
+(122, 2, 76, 6),
+(123, 2, 83, 5),
+(124, 2, 83, 6),
+(125, 2, 66, 6),
+(126, 2, 68, 107),
+(127, 2, 67, 107),
+(128, 2, 82, 107),
+(129, 2, 84, 111),
+(130, 2, 73, 110),
+(131, 2, 86, 60),
+(132, 2, 69, 109),
+(133, 2, 85, 111),
+(134, 2, 48, 111),
+(135, 2, 88, 111),
+(136, 2, 79, 113),
+(137, 2, 56, 113),
+(138, 2, 65, 80),
+(139, 2, 63, 63),
+(140, 2, 62, 99),
+(141, 2, 84, 22),
+(142, 2, 66, 22),
+(143, 2, 58, 22),
+(144, 2, 55, 22),
+(145, 2, 77, 81),
+(146, 2, 55, 114),
+(147, 2, 84, 76),
+(148, 2, 73, 115),
+(149, 2, 83, 37),
+(150, 2, 54, 37),
+(151, 2, 57, 37),
+(152, 2, 60, 37),
+(153, 2, 79, 116),
+(154, 2, 77, 108),
+(155, 2, 73, 108),
+(156, 2, 63, 108),
+(157, 2, 72, 108),
+(158, 2, 66, 1),
+(159, 2, 67, 1),
+(160, 2, 57, 1),
+(161, 2, 75, 1),
+(162, 2, 54, 102),
+(163, 2, 58, 103),
+(164, 2, 90, 43),
+(165, 2, 85, 43),
+(166, 2, 54, 43),
+(167, 2, 60, 43),
+(168, 2, 56, 20),
+(169, 2, 52, 20),
+(170, 2, 88, 20),
+(171, 2, 82, 20),
+(172, 2, 67, 2),
+(173, 2, 64, 2),
+(174, 2, 82, 2),
+(175, 2, 71, 2),
+(176, 2, 78, 60),
+(177, 2, 62, 60);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
